@@ -1,0 +1,2220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>igaClass | Livro de Receitas da Classe</title>
+
+    <!-- Google Fonts: Montserrat & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+
+    <style>
+        :root {
+            /* IGA Identity */
+            --iga-blue: #0b3b7e;
+            --iga-blue-dark: #072652;
+            --iga-red: #d91a2a;
+            --iga-red-dark: #b81422;
+
+            /* Volúpia Identity */
+            --volupia-warm: #c14d24;
+            --volupia-amber: #e77f28;
+            --volupia-cream: #fffaf0;
+            --volupia-oven: #8d3113;
+
+            /* Surface & UI */
+            --bg-canvas: #f6f8fb;
+            --surface-card: #ffffff;
+            --text-primary: #1e293b;
+            --text-muted: #64748b;
+            --accent-border: #e2e8f0;
+            --mobile-nav-height: 64px;
+            --mobile-header-height: 60px;
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
+        }
+
+        * {
+            -webkit-tap-highlight-color: transparent;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-canvas);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .font-serif {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        /* Buttons & Highlights */
+        .btn-iga {
+            background-color: var(--iga-red);
+            border-color: var(--iga-red);
+            color: white;
+            font-weight: 600;
+        }
+
+        .btn-iga:hover,
+        .btn-iga:active {
+            background-color: var(--iga-red-dark);
+            border-color: var(--iga-red-dark);
+            color: white;
+        }
+
+        .btn-volupia {
+            background: linear-gradient(135deg, var(--volupia-warm), var(--volupia-oven));
+            border: none;
+            color: white;
+            font-weight: 600;
+        }
+
+        .btn-volupia:hover {
+            color: #fff;
+            filter: brightness(1.08);
+        }
+
+        .badge-iga-primary {
+            background-color: rgba(11, 59, 126, 0.1);
+            color: var(--iga-blue);
+            border: 1px solid rgba(11, 59, 126, 0.2);
+        }
+
+        .badge-aula-adjustment {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
+
+        /* Logos da Navbar */
+        .brand-logo-desktop {
+            height: 48px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        .brand-logo-mobile {
+            height: 34px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* Controle da Imagem da Ficha no Modal (Tela) */
+        .modal-recipe-thumb {
+            width: 120px;
+            height: 95px;
+            min-width: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+        }
+
+        @media (min-width: 768px) {
+            .mobile-only {
+                display: none !important;
+            }
+
+            .desktop-navbar {
+                background: #ffffff;
+                box-shadow: 0 4px 18px rgba(11, 59, 126, 0.06);
+                border-bottom: 2px solid #eef2f7;
+            }
+
+            .hero-partnership {
+                background: linear-gradient(135deg, #072652 0%, #0b3b7e 55%, #8d3113 100%);
+                color: #ffffff;
+                border-radius: 1.5rem;
+                position: relative;
+                overflow: hidden;
+                box-shadow: 0 12px 30px rgba(11, 59, 126, 0.15);
+            }
+
+            .hero-partnership::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: radial-gradient(circle at 85% 20%, rgba(231, 127, 40, 0.22), transparent 50%);
+                pointer-events: none;
+            }
+
+            .recipe-card {
+                border-radius: 1.25rem;
+                border: 1px solid var(--accent-border);
+                background: #ffffff;
+                transition: transform 0.25s ease, box-shadow 0.25s ease;
+                overflow: hidden;
+            }
+
+            .recipe-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 16px 28px rgba(11, 59, 126, 0.08);
+            }
+
+            .card-img-wrap {
+                height: 190px;
+                position: relative;
+                background-color: #f1f5f9;
+                overflow: hidden;
+            }
+
+            .card-img-wrap img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.4s ease;
+            }
+
+            .recipe-card:hover .card-img-wrap img {
+                transform: scale(1.05);
+            }
+
+            .filter-chip {
+                cursor: pointer;
+                transition: all 0.2s;
+                border: 1px solid #cbd5e1;
+                background: #ffffff;
+                color: #475569;
+                font-weight: 500;
+                font-size: 0.85rem;
+            }
+
+            .filter-chip:hover,
+            .filter-chip.active {
+                background-color: var(--iga-blue) !important;
+                color: #ffffff !important;
+                border-color: var(--iga-blue) !important;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .desktop-only {
+                display: none !important;
+            }
+
+            body {
+                background-color: #f5f7fa;
+                padding-top: var(--mobile-header-height);
+                padding-bottom: calc(var(--mobile-nav-height) + var(--safe-bottom) + 24px);
+            }
+
+            .mobile-top-bar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: var(--mobile-header-height);
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+                z-index: 1040;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 14px;
+            }
+
+            .category-scroll-mobile {
+                display: flex;
+                gap: 8px;
+                overflow-x: auto;
+                padding: 6px 12px 10px 12px;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+
+            .category-scroll-mobile::-webkit-scrollbar {
+                display: none;
+            }
+
+            .filter-chip-mobile {
+                white-space: nowrap;
+                border-radius: 999px;
+                padding: 6px 14px;
+                font-size: 0.8rem;
+                font-weight: 600;
+                color: #475569;
+                background: #ffffff;
+                border: 1px solid #e2e8f0;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            }
+
+            .filter-chip-mobile.active {
+                background: var(--iga-blue);
+                color: #ffffff;
+                border-color: var(--iga-blue);
+                box-shadow: 0 3px 10px rgba(11, 59, 126, 0.3);
+            }
+
+            .recipe-card {
+                border-radius: 1.1rem;
+                border: none;
+                background: #ffffff;
+                box-shadow: 0 3px 14px rgba(0, 0, 0, 0.05);
+                overflow: hidden;
+                margin-bottom: 14px;
+            }
+
+            .card-img-wrap {
+                height: 165px;
+                position: relative;
+                background: #e2e8f0;
+            }
+
+            .card-img-wrap img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .fab-new-recipe {
+                position: fixed;
+                bottom: calc(var(--mobile-nav-height) + var(--safe-bottom) + 16px);
+                right: 18px;
+                width: 58px;
+                height: 58px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, var(--iga-red), #ba1422);
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 8px 22px rgba(217, 26, 42, 0.45);
+                z-index: 1030;
+                font-size: 26px;
+                border: none;
+                transition: transform 0.2s;
+            }
+
+            .fab-new-recipe:active {
+                transform: scale(0.92);
+            }
+
+            .mobile-bottom-bar {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: calc(var(--mobile-nav-height) + var(--safe-bottom));
+                padding-bottom: var(--safe-bottom);
+                background: #ffffff;
+                border-top: 1px solid rgba(0, 0, 0, 0.09);
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                z-index: 1045;
+                box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.03);
+            }
+
+            .mobile-nav-btn {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                color: #94a3b8;
+                font-size: 0.7rem;
+                font-weight: 600;
+                text-decoration: none;
+                background: none;
+                border: none;
+                height: 100%;
+                padding: 0;
+            }
+
+            .mobile-nav-btn i {
+                font-size: 1.3rem;
+                margin-bottom: 2px;
+            }
+
+            .mobile-nav-btn.active {
+                color: var(--iga-red);
+            }
+
+            .modal.fade .modal-dialog {
+                transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            }
+
+            .modal-sheet-mobile .modal-dialog {
+                margin: 0;
+                max-width: 100%;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                transform: translateY(100%);
+            }
+
+            .modal-sheet-mobile.show .modal-dialog {
+                transform: translateY(0);
+            }
+
+            .modal-sheet-mobile .modal-content {
+                border-radius: 1.5rem 1.5rem 0 0 !important;
+                border: none;
+                max-height: 92vh;
+                height: 92vh;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .sheet-handle {
+                width: 44px;
+                height: 5px;
+                background-color: #cbd5e1;
+                border-radius: 10px;
+                margin: 10px auto 4px auto;
+            }
+
+            .mobile-form-footer {
+                position: sticky;
+                bottom: 0;
+                background: #ffffff;
+                padding: 12px 16px;
+                border-top: 1px solid #f1f5f9;
+                z-index: 10;
+            }
+        }
+
+        .bench-adjustment-box {
+            background: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            border-radius: 0.5rem;
+            padding: 0.85rem 1.1rem;
+        }
+
+        /* ----------------------------------------------------
+           AJUSTES DE IMPRESSÃO: TOPO ABSOLUTO E 1 PÁGINA A4
+        ----------------------------------------------------- */
+        @page {
+            size: A4 portrait;
+            margin: 0mm 8mm;
+        }
+
+        @media print {
+            html, body {
+                height: 100% !important;
+                background: #ffffff !important;
+                font-size: 10.5px !important;
+                color: #000000 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            body * {
+                visibility: hidden;
+            }
+
+            #viewRecipeModal,
+            #viewRecipeModal * {
+                visibility: visible;
+            }
+
+            #viewRecipeModal {
+                position: absolute !important;
+                left: 0 !important;
+                top: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                width: 100% !important;
+                height: auto !important;
+                background: #ffffff !important;
+                box-shadow: none !important;
+                border: none !important;
+                display: block !important;
+                opacity: 1 !important;
+            }
+
+            .modal-dialog {
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                transform: none !important;
+            }
+
+            .modal-content {
+                border: none !important;
+                box-shadow: none !important;
+                max-height: none !important;
+                height: auto !important;
+                padding: 0 !important;
+                background: transparent !important;
+            }
+
+            .modal-body {
+                padding: 0 !important;
+                margin: 0 !important;
+                overflow: visible !important;
+            }
+
+            .no-print,
+            .btn-close,
+            .modal-footer,
+            .mobile-top-bar,
+            .mobile-bottom-bar,
+            .fab-new-recipe,
+            .sheet-handle {
+                display: none !important;
+            }
+
+            .print-page-wrapper {
+                page-break-inside: avoid !important;
+                page-break-after: avoid !important;
+                width: 100%;
+                box-sizing: border-box;
+                padding-top: 4mm;
+            }
+
+            .print-header {
+                display: flex !important;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 2px solid #0b3b7e !important;
+                padding-bottom: 4px !important;
+                margin-bottom: 6px !important;
+            }
+
+            .print-hero-card {
+                border: 1px solid #e2e8f0 !important;
+                background: #f8fafc !important;
+                border-radius: 6px !important;
+                padding: 6px 10px !important;
+                margin-bottom: 6px !important;
+            }
+
+            .modal-recipe-thumb {
+                width: 95px !important;
+                height: 70px !important;
+                min-width: 95px !important;
+                object-fit: cover !important;
+                border-radius: 6px !important;
+                border: 1px solid #cbd5e1 !important;
+            }
+
+            .print-col-box {
+                border: 1px solid #e2e8f0 !important;
+                border-radius: 6px !important;
+                padding: 6px 8px !important;
+                background: #ffffff !important;
+                min-height: 100% !important;
+            }
+
+            .print-check-item {
+                border-bottom: 1px dashed #e2e8f0 !important;
+                padding: 2px 0 !important;
+                font-size: 10px !important;
+                line-height: 1.2 !important;
+            }
+
+            .print-step-item {
+                margin-bottom: 3px !important;
+                font-size: 10px !important;
+                line-height: 1.25 !important;
+            }
+
+            .print-adjustments-box {
+                background: #fffbeb !important;
+                border: 1px solid #f59e0b !important;
+                border-radius: 6px !important;
+                padding: 5px 8px !important;
+                margin-top: 6px !important;
+                font-size: 9.5px !important;
+                line-height: 1.25 !important;
+            }
+
+            .print-nutri-bar {
+                border: 1px solid #cbd5e1 !important;
+                border-radius: 4px !important;
+                padding: 3px 6px !important;
+                margin-top: 6px !important;
+                font-size: 9px !important;
+                background: #f8fafc !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR DESKTOP -->
+    <nav class="navbar navbar-expand-lg desktop-navbar sticky-top py-2 desktop-only">
+        <div class="container d-flex align-items-center justify-content-between">
+            <!-- Logos Co-branding IGA x Volúpia -->
+            <div class="d-flex align-items-center gap-3">
+                <div class="d-flex align-items-center" title="Instituto Gastronômico das Américas">
+                    <img src="iga_2.jpg" onerror="this.src='iga.jpg'" alt="IGA" class="brand-logo-desktop">
+                </div>
+
+                <div class="vr my-1 text-secondary opacity-50" style="height: 38px;"></div>
+
+                <div class="d-flex align-items-center" title="Volúpia Forno & Panificação Artesanal">
+                    <img src="logoTipo.jpg" onerror="this.src='LOGOFUNDOAMARELO2_85X85.jpg'" alt="Volúpia" class="brand-logo-desktop">
+                </div>
+
+                <div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="fs-5 fw-bold text-dark lh-1" style="letter-spacing: -0.5px;">iga<span
+                                class="text-danger">Class</span></span>
+                        <span class="badge rounded-pill bg-danger-subtle text-danger fw-semibold px-2 py-0"
+                            style="font-size: 0.65rem;">PARCERIA DIDÁTICA</span>
+                    </div>
+                    <small class="text-muted d-block pt-1" style="font-size: 0.72rem; font-weight: 500;">
+                        Livro de Receitas | Correções em Aula • IGA & Volúpia Padaria
+                    </small>
+                </div>
+            </div>
+
+            <!-- Ações Desktop: Usuário Atual, Administração e Nova Receita -->
+            <div class="d-flex align-items-center gap-2">
+                <!-- Indicador de Usuário Conectado -->
+                <div id="desktopUserBadge" class="d-none align-items-center gap-2 bg-light px-3 py-1 rounded-pill border">
+                    <i class="bi bi-person-circle text-primary"></i>
+                    <span class="small fw-semibold text-dark" id="desktopUserName">Usuário</span>
+                    <button type="button" class="btn btn-link btn-sm text-danger p-0 ms-1" id="btnUserLogout" title="Sair da conta">
+                        <i class="bi bi-box-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Botão para Identificar/Cadastrar (quando não conectado) -->
+                <button type="button" class="btn btn-outline-primary btn-sm rounded-pill px-3" id="btnOpenUserAuth">
+                    <i class="bi bi-person-plus me-1"></i> Identificar-se
+                </button>
+
+                <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill px-3" id="btnAdminGate"
+                    data-bs-toggle="modal" data-bs-target="#adminAuthModal" title="Painel Administrativo">
+                    <i class="bi bi-lock-fill text-warning me-1"></i> Administração
+                </button>
+
+                <!-- Grupo de botões exibido após PIN -->
+                <div id="desktopAdminActionsGroup" style="display: none;" class="align-items-center gap-2">
+                    <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill px-3" id="btnExportJSON"
+                        title="Exportar backup completo">
+                        <i class="bi bi-download me-1"></i> Exportar
+                    </button>
+                    
+                    <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill px-3" id="btnImportJSONTrigger"
+                        title="Importar arquivo JSON">
+                        <i class="bi bi-upload me-1"></i> Importar
+                    </button>
+                    <input type="file" id="fileImportJSON" accept=".json" class="d-none">
+
+                    <button type="button" class="btn btn-outline-info btn-sm rounded-pill px-3" id="btnViewRegisteredUsers"
+                        title="Ver Pessoas Cadastradas">
+                        <i class="bi bi-people-fill me-1"></i> Pessoas
+                    </button>
+
+                    <button type="button" class="btn btn-outline-danger btn-sm rounded-pill px-3" id="btnResetDefault"
+                        title="Restaurar banco pedagógico">
+                        <i class="bi bi-arrow-counterclockwise me-1"></i> Restaurar
+                    </button>
+
+                    <button type="button" class="btn btn-outline-dark btn-sm rounded-circle p-1 px-2" id="btnAdminLockSession"
+                        title="Bloquear Administração">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+
+                <button class="btn btn-iga btn-sm rounded-pill px-3 ms-2 shadow-sm" id="btnOpenNewRecipe">
+                    <i class="bi bi-plus-circle-fill me-1"></i> Nova Receita de Aula
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HEADER MOBILE -->
+    <header class="mobile-top-bar mobile-only">
+        <div class="d-flex align-items-center gap-2">
+            <div class="d-flex align-items-center gap-1">
+                <img src="iga_2.jpg" onerror="this.src='iga.jpg'" alt="IGA" class="brand-logo-mobile">
+                <div class="vr text-secondary opacity-50" style="height: 22px;"></div>
+                <img src="logoTipo.jpg" onerror="this.src='LOGOFUNDOAMARELO2_85X85.jpg'" alt="Volúpia" class="brand-logo-mobile">
+            </div>
+            <div>
+                <span class="fw-bold text-dark fs-6 d-block lh-1">iga<span class="text-danger">Class</span></span>
+                <span class="text-muted" style="font-size: 0.65rem;">Ajustes em Aula • IGA × Volúpia</span>
+            </div>
+        </div>
+        <div class="d-flex align-items-center gap-1">
+            <button class="btn btn-light rounded-circle p-2 text-dark" id="mobBtnUser" aria-label="Identificar-se" title="Identificar">
+                <i class="bi bi-person fs-6"></i>
+            </button>
+            <button class="btn btn-light rounded-circle p-2 text-dark" id="mobBtnSearch" aria-label="Pesquisar">
+                <i class="bi bi-search fs-6"></i>
+            </button>
+            <button class="btn btn-light rounded-circle p-2 text-dark" id="mobBtnMenu" aria-label="Menu">
+                <i class="bi bi-three-dots-vertical fs-6"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="container py-md-4 flex-grow-1 px-3 px-md-auto">
+        <!-- DESKTOP HERO BANNER -->
+        <section class="hero-partnership p-4 p-md-5 mb-4 desktop-only">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <span class="badge bg-danger rounded-pill px-3 py-1 fw-bold">BANCADA GASTRONÔMICA</span>
+                        <span class="badge bg-warning text-dark rounded-pill px-3 py-1 fw-bold">FORNO & COZINHA</span>
+                    </div>
+                    <h1 class="display-6 fw-bold mb-2 font-serif">Anotações e Fichas Técnicas de Aula</h1>
+                    <p class="mb-0 text-white-50" style="max-width: 650px; font-size: 0.95rem; line-height: 1.5;">
+                        Ambiente acadêmico para acompanhamento de fichas operacionais com histórico de correções de
+                        bancada, testes de hidratação e variações térmicas observadas em aula pelos instrutores e
+                        alunos.
+                    </p>
+                </div>
+                <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+                    <div
+                        class="bg-white bg-opacity-10 backdrop-blur p-3 rounded-4 border border-white border-opacity-20 d-inline-block text-start w-100 w-md-auto">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="p-2 bg-white text-danger rounded-3">
+                                <i class="bi bi-journal-check fs-2"></i>
+                            </div>
+                            <div>
+                                <h3 class="mb-0 fw-bold text-white" id="totalRecipesCountDesktop">0</h3>
+                                <small class="text-white-50">Fichas cadastradas</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DESKTOP SEARCH AND MODULE FILTER -->
+        <div class="card border-0 shadow-sm rounded-4 p-3 mb-4 desktop-only">
+            <div class="row g-3 align-items-center">
+                <div class="col-md-5">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0 text-muted rounded-start-pill ps-3">
+                            <i class="bi bi-search"></i>
+                        </span>
+                        <input type="text" id="desktopSearchInput"
+                            class="form-control border-start-0 rounded-end-pill py-2"
+                            placeholder="Buscar por receita, insumo ou módulo...">
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="d-flex flex-wrap gap-2 justify-content-md-end align-items-center"
+                        id="desktopFilterContainer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MOBILE COLLAPSIBLE SEARCH BAR -->
+        <div id="mobileSearchBar" class="mobile-only mb-3 d-none">
+            <div class="input-group shadow-sm">
+                <span class="input-group-text bg-white border-0 ps-3 text-muted">
+                    <i class="bi bi-search"></i>
+                </span>
+                <input type="text" id="mobileSearchInput" class="form-control border-0 py-2"
+                    placeholder="Buscar receita ou insumo...">
+                <button class="btn bg-white border-0 text-muted pe-3" id="mobileCloseSearch">
+                    <i class="bi bi-x-circle-fill"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- MOBILE CATEGORY HORIZONTAL SCROLLER -->
+        <div class="mobile-only -mx-3 mb-3">
+            <div class="category-scroll-mobile" id="mobileFilterContainer">
+            </div>
+        </div>
+
+        <!-- MOBILE FEED HEADER -->
+        <div class="mobile-only d-flex justify-content-between align-items-center mb-3 px-1">
+            <h6 class="fw-bold mb-0 text-dark" id="mobileFeedTitle">Fichas de Bancada</h6>
+            <span class="badge bg-white text-muted border px-2 py-1 rounded-pill" id="mobileCounterBadge">0 receitas</span>
+        </div>
+
+        <!-- RECIPES GRID -->
+        <div class="row g-3 g-md-4" id="recipesGridContainer">
+        </div>
+
+        <!-- EMPTY STATE -->
+        <div id="recipesEmptyState" class="text-center py-5 d-none">
+            <div class="p-4 bg-white rounded-4 shadow-sm d-inline-block max-w-md">
+                <i class="bi bi-journal-x display-4 text-secondary mb-3 d-block"></i>
+                <h5 class="fw-bold mb-1">Nenhuma ficha técnica encontrada</h5>
+                <p class="text-muted small mb-3">Tente alterar os termos de busca ou o módulo de aula selecionado.</p>
+                <button class="btn btn-outline-dark rounded-pill btn-sm px-4" id="btnResetSearchFilters">Limpar Filtros</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Mobile FAB -->
+    <button class="fab-new-recipe mobile-only" id="mobFabNew" title="Nova Receita de Aula"
+        aria-label="Nova Receita de Aula">
+        <i class="bi bi-plus-lg"></i>
+    </button>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <nav class="mobile-bottom-bar mobile-only">
+        <button type="button" class="mobile-nav-btn active" id="mobNavHome">
+            <i class="bi bi-journal-richtext"></i>
+            <span>Aulas</span>
+        </button>
+        <button type="button" class="mobile-nav-btn" id="mobNavSearch">
+            <i class="bi bi-search"></i>
+            <span>Buscar</span>
+        </button>
+        <button type="button" class="mobile-nav-btn" id="mobNavAdd">
+            <i class="bi bi-plus-circle-fill text-danger" style="font-size: 1.6rem; margin-top: -3px;"></i>
+            <span class="text-dark fw-bold">Novo</span>
+        </button>
+        <button type="button" class="mobile-nav-btn" id="mobNavCategories">
+            <i class="bi bi-layers-fill"></i>
+            <span>Módulos</span>
+        </button>
+        <button type="button" class="mobile-nav-btn" id="mobNavSettings">
+            <i class="bi bi-sliders"></i>
+            <span>Ajustes</span>
+        </button>
+    </nav>
+
+    <!-- MODAL DE CADASTRO / LOGIN COM SOLICITAÇÃO DE SENHA -->
+    <div class="modal fade" id="userAuthModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow">
+                <div class="modal-header border-bottom px-4 py-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="p-2 bg-primary-subtle text-primary rounded-circle">
+                            <i class="bi bi-person-lock fs-5"></i>
+                        </span>
+                        <div>
+                            <h5 class="modal-title fw-bold fs-6 mb-0">Identificação de Bancada</h5>
+                            <small class="text-muted" style="font-size: 0.75rem;">Apenas pessoas cadastradas podem cadastrar, editar ou apagar fichas.</small>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body px-4 py-3">
+                    <ul class="nav nav-pills nav-fill mb-3" id="userAuthTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active rounded-pill py-1 small fw-semibold" id="tab-login" data-bs-toggle="pill" data-bs-target="#panel-login" type="button" role="tab">Já sou Cadastrado</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-pill py-1 small fw-semibold" id="tab-register" data-bs-toggle="pill" data-bs-target="#panel-register" type="button" role="tab">Novo Cadastro</button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" id="userAuthTabsContent">
+                        <!-- Aba Login: E-mail e Senha -->
+                        <div class="tab-pane fade show active" id="panel-login" role="tabpanel">
+                            <form id="formUserLogin">
+                                <div class="mb-2">
+                                    <label class="form-label small fw-semibold">E-mail Cadastrado *</label>
+                                    <input type="email" class="form-control rounded-3" id="loginEmail" required placeholder="seuemail@exemplo.com">
+                                    <div class="invalid-feedback small" id="loginEmailError">E-mail não localizado. Por favor, cadastre-se.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label small fw-semibold">Senha *</label>
+                                    <input type="password" class="form-control rounded-3" id="loginPassword" required placeholder="Digite sua senha" autocomplete="current-password">
+                                    <div class="invalid-feedback small" id="loginPassError">Senha incorreta.</div>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100 rounded-pill py-2 fw-semibold">
+                                    <i class="bi bi-box-arrow-in-right me-1"></i> Entrar
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Aba Novo Cadastro: Nome, WhatsApp, E-mail e Senha -->
+                        <div class="tab-pane fade" id="panel-register" role="tabpanel">
+                            <form id="formUserRegister">
+                                <div class="mb-2">
+                                    <label class="form-label small fw-semibold">Nome Completo *</label>
+                                    <input type="text" class="form-control rounded-3" id="regName" required placeholder="Ex: Maria Silva">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small fw-semibold">WhatsApp *</label>
+                                    <input type="tel" class="form-control rounded-3" id="regWhatsApp" required placeholder="(XX) 9XXXX-XXXX">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small fw-semibold">E-mail *</label>
+                                    <input type="email" class="form-control rounded-3" id="regEmail" required placeholder="maria@exemplo.com">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label small fw-semibold">Crie uma Senha *</label>
+                                    <input type="password" class="form-control rounded-3" id="regPassword" required minlength="4" placeholder="Mínimo 4 caracteres" autocomplete="new-password">
+                                </div>
+                                <button type="submit" class="btn btn-iga w-100 rounded-pill py-2 fw-semibold">
+                                    <i class="bi bi-check2-circle me-1"></i> Concluir Cadastro
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE LISTA DE PESSOAS CADASTRADAS (ADMIN) -->
+    <div class="modal fade" id="registeredUsersModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow">
+                <div class="modal-header border-bottom px-4 py-3">
+                    <h5 class="modal-title fw-bold fs-6"><i class="bi bi-people-fill text-primary me-2"></i>Pessoas Cadastradas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body p-0" style="max-height: 60vh; overflow-y: auto;">
+                    <ul class="list-group list-group-flush" id="usersListContainer">
+                        <!-- Renderizado via JS -->
+                    </ul>
+                </div>
+                <div class="modal-footer border-0 p-2 justify-content-end">
+                    <button type="button" class="btn btn-secondary btn-sm rounded-pill px-3" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE VALIDAÇÃO DO PIN DE ADMINISTRAÇÃO -->
+    <div class="modal fade" id="adminAuthModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow">
+                <div class="modal-header border-0 pb-0 justify-content-end">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body text-center pt-0 px-4 pb-4">
+                    <div class="p-3 bg-danger-subtle text-danger rounded-circle d-inline-flex mb-3">
+                        <i class="bi bi-shield-lock-fill fs-2"></i>
+                    </div>
+                    <h5 class="fw-bold mb-1">Acesso Restrito</h5>
+                    <p class="text-muted small mb-3">Digite o PIN para desbloquear os botões de administração.</p>
+                    <form id="adminPinForm">
+                        <div class="mb-3">
+                            <input type="password" class="form-control text-center rounded-3" id="adminPinInput" 
+                                placeholder="Digite o PIN" required autocomplete="current-password">
+                            <div class="invalid-feedback text-center small" id="pinErrorMsg">PIN incorreto.</div>
+                        </div>
+                        <button type="submit" class="btn btn-iga w-100 rounded-pill py-2">Desbloquear</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE VISUALIZAÇÃO E IMPRESSÃO -->
+    <div class="modal fade" id="viewRecipeModal" tabindex="-1" aria-labelledby="viewTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content rounded-4 border-0 shadow-lg">
+                <div class="sheet-handle mobile-only"></div>
+                <div class="modal-header border-0 pb-0 position-relative pt-3 px-4 no-print">
+                    <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal"
+                        aria-label="Fechar"></button>
+                </div>
+
+                <div class="modal-body pt-0 px-3 px-md-4" id="viewRecipeContent">
+                    <!-- Conteúdo dinâmico gerado via JS -->
+                </div>
+
+                <div class="modal-footer border-0 px-3 px-md-4 pb-3 bg-light rounded-bottom-4 no-print">
+                    <button type="button" class="btn btn-outline-dark rounded-pill px-3 px-md-4 btn-sm"
+                        onclick="window.print()">
+                        <i class="bi bi-printer me-1"></i> Imprimir Ficha de Bancada (1 Página)
+                    </button>
+                    <button type="button" class="btn btn-outline-primary rounded-pill px-3 px-md-4 btn-sm"
+                        id="btnEditCurrent">
+                        <i class="bi bi-pencil me-1"></i> Editar Ajustes
+                    </button>
+                    <button type="button" class="btn btn-secondary rounded-pill px-3 px-md-4 btn-sm"
+                        data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE FORMULÁRIO -->
+    <div class="modal fade" id="recipeFormModal" tabindex="-1" aria-labelledby="formTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content rounded-4 border-0 shadow-lg">
+                <div class="sheet-handle mobile-only"></div>
+                <div class="modal-header border-bottom px-3 px-md-4 py-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="p-1 bg-danger-subtle text-danger rounded-2">
+                            <i class="bi bi-pencil-square fs-5"></i>
+                        </span>
+                        <div>
+                            <h5 class="modal-title fw-bold fs-6 fs-md-5" id="formModalTitle">Cadastrar Ficha de Aula
+                            </h5>
+                            <small class="text-muted d-block" style="font-size: 0.72rem;">igaClass • Padronização e
+                                Ajustes de Bancada</small>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body px-3 px-md-4 py-3" style="max-height: 75vh; overflow-y: auto;">
+                    <form id="recipeForm" novalidate>
+                        <input type="hidden" id="recipeId">
+
+                        <div class="row g-2 g-md-3 mb-3">
+                            <div class="col-md-7">
+                                <label class="form-label fw-semibold small">Nome da Receita / Preparação *</label>
+                                <input type="text" class="form-control rounded-3" id="recipeName" required
+                                    placeholder="Ex: Pão de Campanha com Levain">
+                                <div class="invalid-feedback">Informe o nome da receita.</div>
+                            </div>
+                            <div class="col-md-5">
+                                <label class="form-label fw-semibold small">Disciplina / Módulo de Aula *</label>
+                                <select class="form-select rounded-3" id="recipeModule" required>
+                                    <option value="" selected disabled>Selecione a disciplina...</option>
+                                    <option value="Panificação Clássica & Artesanal">Panificação Clássica & Artesanal
+                                        (Volúpia)</option>
+                                    <option value="Confeitaria & Sobremesas">Confeitaria & Sobremesas</option>
+                                    <option value="Cozinha Internacional">Cozinha Internacional</option>
+                                    <option value="Garde Manger & Entradas">Garde Manger & Entradas</option>
+                                    <option value="Bases Culinárias & Molhos">Bases Culinárias & Molhos</option>
+                                    <option value="Bebidas & Coquetelaria">Bebidas & Coquetelaria</option>
+                                </select>
+                                <div class="invalid-feedback">Selecione o módulo correspondente.</div>
+                            </div>
+                        </div>
+
+                        <div class="row g-2 g-md-3 mb-3">
+                            <div class="col-6 col-md-3">
+                                <label class="form-label fw-semibold small">Categoria *</label>
+                                <select class="form-select rounded-3" id="recipeCategory" required>
+                                    <option value="Panificação">Panificação</option>
+                                    <option value="Prato Principal">Prato Principal</option>
+                                    <option value="Sobremesa">Sobremesa</option>
+                                    <option value="Lanche / Entrada">Lanche / Entrada</option>
+                                    <option value="Molhos e Bases">Molhos e Bases</option>
+                                    <option value="Bebida">Bebida</option>
+                                </select>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <label class="form-label fw-semibold small">Tempo em Bancada *</label>
+                                <input type="text" class="form-control rounded-3" id="recipeTime" required
+                                    placeholder="Ex: 2h 40min">
+                                <div class="invalid-feedback">Informe o tempo.</div>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <label class="form-label fw-semibold small">Rendimento Padrão *</label>
+                                <input type="text" class="form-control rounded-3" id="recipeYield" required
+                                    placeholder="Ex: 2 pães (600g)">
+                                <div class="invalid-feedback">Informe o rendimento.</div>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <label class="form-label fw-semibold small">Foto URL (Opcional)</label>
+                                <input type="url" class="form-control rounded-3" id="recipeImage"
+                                    placeholder="https://...">
+                            </div>
+                        </div>
+
+                        <hr class="my-3">
+
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <div>
+                                <h6 class="fw-bold mb-0 fs-6 text-dark"><i class="bi bi-basket me-1 text-danger"></i>
+                                    Insumos & Proporções</h6>
+                                <small class="text-muted" style="font-size: 0.72rem;">Adicione ingredientes com suas
+                                    medidas e referências.</small>
+                            </div>
+                            <button type="button" class="btn btn-outline-primary btn-sm rounded-pill px-3"
+                                id="btnAddIngredientRow">
+                                <i class="bi bi-plus-lg me-1"></i> Insumo
+                            </button>
+                        </div>
+
+                        <div id="ingredientsContainer" class="mb-3"></div>
+
+                        <hr class="my-3">
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small">Modo de Preparo Padronizado *</label>
+                            <textarea class="form-control rounded-3" id="recipeInstructions" rows="4" required
+                                placeholder="Descreva os passos didáticos de preparo (autólise, sova, dobras, fermentação, cozimento)..."></textarea>
+                            <div class="invalid-feedback">Descreva o passo a passo.</div>
+                        </div>
+
+                        <hr class="my-3">
+
+                        <div class="p-3 rounded-3 mb-3" style="background-color: #fff9e6; border: 1px dashed #d97706;">
+                            <div class="d-flex align-items-center gap-2 mb-1">
+                                <i class="bi bi-cone-striped text-warning fs-5"></i>
+                                <h6 class="fw-bold mb-0 text-dark fs-6">Ajustes Feitos em Aula & Notas do Instrutor</h6>
+                            </div>
+                            <small class="text-muted d-block mb-2" style="font-size: 0.75rem;">
+                                Registre correções de bancada (hidratação, ponto de forno, observações).
+                            </small>
+                            <textarea class="form-control rounded-3 border-warning" id="recipeClassAdjustments" rows="3"
+                                placeholder="Ex: Em aula no dia 14/09, a farinha exigiu 68% de hidratação (+25ml água gelada). Forno a 210°C assou em 28 minutos."></textarea>
+                        </div>
+
+                        <div class="row g-2 g-md-3">
+                            <div class="col-12">
+                                <h6 class="fw-bold mb-1 fs-6 text-dark"><i class="bi bi-activity text-success me-1"></i>
+                                    Estimativa Nutricional (por porção)</h6>
+                            </div>
+                            <div class="col-3">
+                                <label class="form-label small text-muted">Kcal</label>
+                                <input type="number" class="form-control form-control-sm rounded-2" id="nutriCalories"
+                                    placeholder="Ex: 210">
+                            </div>
+                            <div class="col-3">
+                                <label class="form-label small text-muted">Proteínas (g)</label>
+                                <input type="number" step="0.1" class="form-control form-control-sm rounded-2"
+                                    id="nutriProtein" placeholder="Ex: 8.5">
+                            </div>
+                            <div class="col-3">
+                                <label class="form-label small text-muted">Carboidratos (g)</label>
+                                <input type="number" step="0.1" class="form-control form-control-sm rounded-2"
+                                    id="nutriCarbs" placeholder="Ex: 42">
+                            </div>
+                            <div class="col-3">
+                                <label class="form-label small text-muted">Gorduras (g)</label>
+                                <input type="number" step="0.1" class="form-control form-control-sm rounded-2"
+                                    id="nutriFats" placeholder="Ex: 2.1">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer border-top px-3 px-md-4 py-2 py-md-3 mobile-form-footer">
+                    <button type="button" class="btn btn-light rounded-pill px-3"
+                        data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-iga rounded-pill px-4 flex-grow-1 flex-md-grow-0"
+                        id="btnSaveRecipe">
+                        <i class="bi bi-save2 me-1"></i> Gravar Ficha
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE EXCLUSÃO -->
+    <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow">
+                <div class="modal-body text-center p-4">
+                    <i class="bi bi-trash3-fill text-danger display-5 mb-3 d-block"></i>
+                    <h5 class="fw-bold mb-1">Excluir Ficha?</h5>
+                    <p class="text-muted small mb-4" id="deleteModalRecipeName">Esta ação removerá a ficha técnica
+                        permanentemente.</p>
+                    <div class="d-flex justify-content-center gap-2">
+                        <button type="button" class="btn btn-light rounded-pill px-3 btn-sm"
+                            data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-danger rounded-pill px-3 btn-sm"
+                            id="btnConfirmDelete">Confirmar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- OFFCANVAS MOBILE -->
+    <div class="offcanvas offcanvas-bottom rounded-top-4 border-0" tabindex="-1" id="mobileSettingsOffcanvas"
+        aria-labelledby="settingsLabel" style="height: auto; max-height: 80vh;">
+        <div class="sheet-handle"></div>
+        <div class="offcanvas-header border-bottom py-2">
+            <h5 class="offcanvas-title fw-bold fs-6" id="settingsLabel">igaClass • Parceria IGA & Volúpia</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Fechar"></button>
+        </div>
+        <div class="offcanvas-body p-3">
+            <div class="list-group list-group-flush rounded-3">
+                <button type="button"
+                    class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3"
+                    id="mobActionExport">
+                    <i class="bi bi-download text-primary fs-5"></i>
+                    <div>
+                        <div class="fw-semibold">Exportar Backup JSON</div>
+                        <small class="text-muted">Download de todas as receitas e anotações</small>
+                    </div>
+                </button>
+                <label class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 mb-0"
+                    style="cursor: pointer;">
+                    <i class="bi bi-upload text-success fs-5"></i>
+                    <div>
+                        <div class="fw-semibold">Importar Backup JSON</div>
+                        <small class="text-muted">Carregar arquivo de ficha técnica</small>
+                    </div>
+                    <input type="file" id="mobFileImport" accept=".json" class="d-none">
+                </label>
+                <button type="button"
+                    class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 text-danger"
+                    id="mobActionReset">
+                    <i class="bi bi-arrow-counterclockwise fs-5"></i>
+                    <div>
+                        <div class="fw-semibold">Restaurar Fichas Didáticas</div>
+                        <small class="text-muted">Recarregar os dados padronizados originais</small>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Component -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1090; margin-bottom: 60px;">
+        <div id="igaToast" class="toast align-items-center text-white bg-dark border-0 rounded-3 shadow" role="alert"
+            aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body" id="toastMessage">Operação executada.</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const STORAGE_KEY = "iga_class_recipes_v2";
+        const USERS_STORAGE_KEY = "iga_class_registered_users_v1";
+        const SESSION_USER_KEY = "iga_class_current_logged_user";
+        const ADMIN_PIN = "Abherval5791@#$";
+
+        const DEFAULT_RECIPES_DATABASE = [
+            {
+                id: "iga-rec-01",
+                name: "Pão Rústico de Campanha com Levain Natural",
+                module: "Panificação Clássica & Artesanal",
+                category: "Panificação",
+                prepTime: "4h 30min",
+                yield: "2 pães (550g)",
+                image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80",
+                ingredients: [
+                    {item: "Farinha de Trigo Especial W300", amount: "500", unit: "g", notes: "100%"},
+                    {item: "Água mineral gelada (5°C)", amount: "350", unit: "ml", notes: "70% hidratação"},
+                    {item: "Levain ativo (fermento natural Volúpia)", amount: "100", unit: "g", notes: "20%"},
+                    {item: "Sal refinado de cozinha", amount: "10", unit: "g", notes: "2%"}
+                ],
+                instructions: "1. Autólise: misture farinha e 320ml de água por 45 minutos.\n2. Adicione levain ativo e sove até absorver bem.\n3. Incorpore sal e 30ml de água restante (bassinage).\n4. Realize 3 dobras a cada 30 minutos em temp. ambiente.\n5. Pré-modele em batard e descanse 20 minutos coberto.\n6. Modele final no banneton e fermente na geladeira (4°C) por 14h.\n7. Forno com panela de ferro pré-aquecido a 240°C por 40 min.\n8. Pestana e asse tampado 20 min; destampe a 210°C por 22 min.",
+                classAdjustments: "Ajuste em Aula (Turma B - Manhã):\nA farinha apresentou absorção menor pela umidade do dia. Reduzimos a bassinage em 15ml. O forno da bancada 3 precisou de 25 min destampado para a cor perfeita.",
+                nutrition: { calories: 165, protein: 5.5, carbs: 33.0, fats: 0.8 }
+            },
+            {
+                id: "iga-rec-02",
+                name: "Risoto de Funghi Secchi & Cogumelos Frescos",
+                module: "Cozinha Internacional",
+                category: "Prato Principal",
+                prepTime: "45 min",
+                yield: "4 porções",
+                image: "https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?auto=format&fit=crop&w=800&q=80",
+                ingredients: [
+                    {item: "Arroz Arbóreo Italiano", amount: "320", unit: "g", notes: "Base"},
+                    {item: "Funghi Secchi hidratado", amount: "60", unit: "g", notes: "Reservar caldo"},
+                    {item: "Cogumelos Paris frescos", amount: "200", unit: "g", notes: "Laminados"},
+                    {item: "Caldo de legumes caseiro", amount: "1.2", unit: "L", notes: "Fervente"},
+                    {item: "Vinho branco seco", amount: "120", unit: "ml", notes: "Deglaçagem"},
+                    {item: "Manteiga sem sal gelada", amount: "60", unit: "g", notes: "Mantecatura"},
+                    {item: "Parmesão ralado fino", amount: "80", unit: "g", notes: "Finalização"}
+                ],
+                instructions: "1. Hidrate o funghi em água morna por 20 min; filtre o caldo e junte ao caldo quente.\n2. Doure os cogumelos frescos na manteiga e reserve.\n3. Sue cebola no azeite e nacare o arroz por 2 min.\n4. Deglaceie com vinho branco até evaporar o álcool.\n5. Adicione caldo concha a concha mexendo continuamente (17 min).\n6. Fora do fogo, realize mantecatura com manteiga e parmesão.",
+                classAdjustments: "Ajuste em Aula (Chef Instrutor):\nPeneirar 2x o caldo do funghi para evitar resíduos. Manter o fogo desligado na hora da mantecatura para manter emulsão aveludada.",
+                nutrition: { calories: 390, protein: 9.8, carbs: 58.0, fats: 13.5 }
+            },
+            {
+                id: "iga-rec-03",
+                name: "Focaccia Genovese com Alecrim e Flor de Sal",
+                module: "Panificação Clássica & Artesanal",
+                category: "Panificação",
+                prepTime: "3h",
+                yield: "1 assadeira (30x40cm)",
+                image: "https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?auto=format&fit=crop&w=800&q=80",
+                ingredients: [
+                    {item: "Farinha de Trigo 00", amount: "500", unit: "g", notes: "100%"},
+                    {item: "Água morna", amount: "375", unit: "ml", notes: "75% hidratação"},
+                    {item: "Azeite extravirgem", amount: "40", unit: "ml", notes: "Na massa"},
+                    {item: "Fermento biológico fresco", amount: "15", unit: "g", notes: "3%"},
+                    {item: "Sal marinho fino", amount: "10", unit: "g", notes: "2%"},
+                    {item: "Salmoura com azeite e flor de sal", amount: "60", unit: "ml", notes: "Cobertura"}
+                ],
+                instructions: "1. Misture água, fermento, farinha e azeite.\n2. Incorpore sal e sove com dobras por 10 min.\n3. Fermente 1h até dobrar de tamanho.\n4. Estique na assadeira untada e fermente mais 45 min.\n5. Faça covinhas com dedos e despeje a salmoura com alecrim.\n6. Asse a 220°C por 22 minutos até dourar.",
+                classAdjustments: "Ajuste em Aula (Volúpia Workshop):\nCom temperatura da bancada a 29°C, a primeira fermentação ocorreu em 35 minutos. Cuidado com o ponto de hiperfermentação.",
+                nutrition: { calories: 230, protein: 6.0, carbs: 38.0, fats: 6.2 }
+            },
+            {
+                id: "iga-rec-04",
+                name: "Tarte Tatin Clássica de Maçãs Caramelizadas",
+                module: "Confeitaria & Sobremesas",
+                category: "Sobremesa",
+                prepTime: "1h 10min",
+                yield: "8 fatias",
+                image: "https://images.unsplash.com/photo-1519915028121-7d3463d20b13?auto=format&fit=crop&w=800&q=80",
+                ingredients: [
+                    {item: "Massa Folhada ou Brisée", amount: "300", unit: "g", notes: "Disco 26cm"},
+                    {item: "Maçãs Gala ou Fuji firmes", amount: "6", unit: "un", notes: "Em quartos"},
+                    {item: "Manteiga sem sal", amount: "80", unit: "g", notes: "Caramelo"},
+                    {item: "Açúcar refinado", amount: "150", unit: "g", notes: "Caramelo"},
+                    {item: "Extrato natural de baunilha", amount: "1", unit: "colher chá", notes: "Aroma"}
+                ],
+                instructions: "1. Na forma de fundo fixo, caramelize açúcar a seco até tom âmbar.\n2. Adicione manteiga aos cubos e baunilha.\n3. Acomode maçãs compactadas concêntricas e cozinhe 15 min em fogo baixo.\n4. Cubra com a massa empurrando as bordas.\n5. Asse a 190°C por 30 minutos.\n6. Descanse 10 minutos e desenforme ainda quente.",
+                classAdjustments: "Ajuste em Aula:\nDesenformar estritamente morna (entre 8 e 10 min pós-forno) para o caramelo não colar na forma e nem queimar as mãos.",
+                nutrition: { calories: 285, protein: 2.8, carbs: 45.0, fats: 11.0 }
+            }
+        ];
+
+        let currentRecipes = [];
+        let registeredUsers = [];
+        let currentLoggedUser = null;
+        let pendingActionCallback = null;
+
+        let selectedModule = "Todos";
+        let activeSearch = "";
+        let pendingDeleteId = null;
+        let activeScaleMultiplier = 1;
+        let viewingRecipe = null;
+
+        let viewModal = null;
+        let formModal = null;
+        let deleteModal = null;
+        let adminAuthModal = null;
+        let userAuthModal = null;
+        let registeredUsersModal = null;
+        let settingsOffcanvas = null;
+        let toastEl = null;
+
+        document.addEventListener("DOMContentLoaded", () => {
+            initApp();
+        });
+
+        function initApp() {
+            handleResize();
+            window.addEventListener('resize', handleResize);
+
+            viewModal = new bootstrap.Modal(document.getElementById('viewRecipeModal'));
+            formModal = new bootstrap.Modal(document.getElementById('recipeFormModal'));
+            deleteModal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
+            adminAuthModal = new bootstrap.Modal(document.getElementById('adminAuthModal'));
+            userAuthModal = new bootstrap.Modal(document.getElementById('userAuthModal'));
+            registeredUsersModal = new bootstrap.Modal(document.getElementById('registeredUsersModal'));
+            settingsOffcanvas = new bootstrap.Offcanvas(document.getElementById('mobileSettingsOffcanvas'));
+            toastEl = new bootstrap.Toast(document.getElementById('igaToast'));
+
+            loadStoredData();
+            loadUsersData();
+            setupFilterBadges();
+            attachEventListeners();
+            setupAdminAuth();
+            setupUserAuth();
+            renderRecipeCards();
+        }
+
+        function handleResize() {
+            const isMobile = window.innerWidth < 768;
+            const viewModalEl = document.getElementById('viewRecipeModal');
+            const formModalEl = document.getElementById('recipeFormModal');
+
+            if (isMobile) {
+                viewModalEl.classList.add('modal-sheet-mobile');
+                formModalEl.classList.add('modal-sheet-mobile');
+            } else {
+                viewModalEl.classList.remove('modal-sheet-mobile');
+                formModalEl.classList.remove('modal-sheet-mobile');
+            }
+        }
+
+        function loadStoredData() {
+            try {
+                const stored = localStorage.getItem(STORAGE_KEY);
+                if (stored) {
+                    currentRecipes = JSON.parse(stored);
+                } else {
+                    currentRecipes = [...DEFAULT_RECIPES_DATABASE];
+                    saveToLocalStorage();
+                }
+            } catch (err) {
+                console.error("Erro ao ler localStorage:", err);
+                currentRecipes = [...DEFAULT_RECIPES_DATABASE];
+            }
+            updateCounters();
+        }
+
+        function saveToLocalStorage() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(currentRecipes));
+                updateCounters();
+            } catch (err) {
+                showToast("Erro ao gravar dados no armazenamento local.", "bg-danger");
+            }
+        }
+
+        /* Gestão de Pessoas / Usuários Cadastrados com Senha */
+        function loadUsersData() {
+            try {
+                const storedUsers = localStorage.getItem(USERS_STORAGE_KEY);
+                if (storedUsers) {
+                    registeredUsers = JSON.parse(storedUsers);
+                } else {
+                    // Usuário inicial didático com senha padrão
+                    registeredUsers = [{
+                        name: "Chef Instrutor",
+                        whatsapp: "(21) 99999-8888",
+                        email: "chef@igaclass.com",
+                        password: "1234"
+                    }];
+                    localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(registeredUsers));
+                }
+
+                const sessionUser = sessionStorage.getItem(SESSION_USER_KEY);
+                if (sessionUser) {
+                    currentLoggedUser = JSON.parse(sessionUser);
+                }
+                updateUserUI();
+            } catch (e) {
+                registeredUsers = [];
+            }
+        }
+
+        function saveUsersData() {
+            try {
+                localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(registeredUsers));
+            } catch (e) {
+                showToast("Erro ao gravar pessoas cadastradas.", "bg-danger");
+            }
+        }
+
+        function updateUserUI() {
+            const badge = document.getElementById('desktopUserBadge');
+            const nameEl = document.getElementById('desktopUserName');
+            const btnOpen = document.getElementById('btnOpenUserAuth');
+
+            if (currentLoggedUser) {
+                badge.classList.remove('d-none');
+                badge.classList.add('d-inline-flex');
+                nameEl.textContent = currentLoggedUser.name.split(' ')[0];
+                btnOpen.classList.add('d-none');
+            } else {
+                badge.classList.add('d-none');
+                badge.classList.remove('d-inline-flex');
+                btnOpen.classList.remove('d-none');
+            }
+        }
+
+        function requireRegisteredUser(callback) {
+            if (currentLoggedUser) {
+                callback();
+            } else {
+                pendingActionCallback = callback;
+                userAuthModal.show();
+            }
+        }
+
+        function setupUserAuth() {
+            // Login com validação de E-mail e Senha
+            document.getElementById('formUserLogin').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const emailInput = document.getElementById('loginEmail');
+                const passInput = document.getElementById('loginPassword');
+                const emailVal = emailInput.value.trim().toLowerCase();
+                const passVal = passInput.value.trim();
+
+                emailInput.classList.remove('is-invalid');
+                passInput.classList.remove('is-invalid');
+
+                const user = registeredUsers.find(u => u.email.toLowerCase() === emailVal);
+
+                if (!user) {
+                    emailInput.classList.add('is-invalid');
+                    return;
+                }
+
+                // Verifica se a senha confere
+                if (user.password && user.password !== passVal) {
+                    passInput.classList.add('is-invalid');
+                    passInput.focus();
+                    return;
+                }
+
+                currentLoggedUser = user;
+                sessionStorage.setItem(SESSION_USER_KEY, JSON.stringify(user));
+                userAuthModal.hide();
+                updateUserUI();
+                showToast(`Bem-vindo(a), ${user.name}! Acesso liberado.`, "bg-success");
+                
+                emailInput.value = "";
+                passInput.value = "";
+
+                if (pendingActionCallback) {
+                    const cb = pendingActionCallback;
+                    pendingActionCallback = null;
+                    cb();
+                }
+            });
+
+            // Novo Cadastro com Senha
+            document.getElementById('formUserRegister').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('regName').value.trim();
+                const whatsapp = document.getElementById('regWhatsApp').value.trim();
+                const email = document.getElementById('regEmail').value.trim().toLowerCase();
+                const password = document.getElementById('regPassword').value.trim();
+
+                if (registeredUsers.some(u => u.email.toLowerCase() === email)) {
+                    showToast("Este e-mail já está cadastrado. Utilize a aba 'Já sou Cadastrado'.", "bg-warning");
+                    return;
+                }
+
+                const newUser = { name, whatsapp, email, password };
+                registeredUsers.push(newUser);
+                saveUsersData();
+
+                currentLoggedUser = newUser;
+                sessionStorage.setItem(SESSION_USER_KEY, JSON.stringify(newUser));
+
+                userAuthModal.hide();
+                updateUserUI();
+                showToast("Cadastro realizado com sucesso!", "bg-success");
+
+                document.getElementById('formUserRegister').reset();
+
+                if (pendingActionCallback) {
+                    const cb = pendingActionCallback;
+                    pendingActionCallback = null;
+                    cb();
+                }
+            });
+
+            // Logout do Usuário
+            document.getElementById('btnUserLogout').addEventListener('click', () => {
+                currentLoggedUser = null;
+                sessionStorage.removeItem(SESSION_USER_KEY);
+                updateUserUI();
+                showToast("Sessão do usuário encerrada.", "bg-secondary");
+            });
+
+            document.getElementById('btnOpenUserAuth').addEventListener('click', () => {
+                pendingActionCallback = null;
+                userAuthModal.show();
+            });
+
+            document.getElementById('mobBtnUser').addEventListener('click', () => {
+                pendingActionCallback = null;
+                userAuthModal.show();
+            });
+
+            // Visualizar Pessoas no Painel de Admin
+            document.getElementById('btnViewRegisteredUsers').addEventListener('click', () => {
+                const listEl = document.getElementById('usersListContainer');
+                listEl.innerHTML = "";
+                if (registeredUsers.length === 0) {
+                    listEl.innerHTML = `<li class="list-group-item text-center text-muted py-3">Nenhuma pessoa cadastrada.</li>`;
+                } else {
+                    registeredUsers.forEach((u, i) => {
+                        listEl.innerHTML += `
+                            <li class="list-group-item d-flex justify-content-between align-items-center py-2 px-3">
+                                <div>
+                                    <strong class="d-block text-dark small">${escapeHTML(u.name)}</strong>
+                                    <small class="text-muted d-block" style="font-size: 0.75rem;"><i class="bi bi-whatsapp text-success me-1"></i>${escapeHTML(u.whatsapp)} • ${escapeHTML(u.email)}</small>
+                                </div>
+                                <span class="badge bg-secondary-subtle text-dark rounded-pill" style="font-size: 0.65rem;">#${i+1}</span>
+                            </li>
+                        `;
+                    });
+                }
+                registeredUsersModal.show();
+            });
+        }
+
+        function updateCounters() {
+            const count = currentRecipes.length;
+            const desktopCount = document.getElementById('totalRecipesCountDesktop');
+            const mobileCount = document.getElementById('mobileCounterBadge');
+            if (desktopCount) desktopCount.textContent = count;
+            if (mobileCount) mobileCount.textContent = `${count} ${count === 1 ? 'receita' : 'receitas'}`;
+        }
+
+        function showToast(msg, bg = "bg-dark") {
+            const toastElement = document.getElementById('igaToast');
+            const toastText = document.getElementById('toastMessage');
+            toastElement.className = `toast align-items-center text-white ${bg} border-0 rounded-3 shadow`;
+            toastText.textContent = msg;
+            toastEl.show();
+        }
+
+        function setupAdminAuth() {
+            const form = document.getElementById('adminPinForm');
+            const pinInput = document.getElementById('adminPinInput');
+            const modalEl = document.getElementById('adminAuthModal');
+
+            modalEl.addEventListener('shown.bs.modal', () => {
+                pinInput.value = "";
+                pinInput.classList.remove('is-invalid');
+                pinInput.focus();
+            });
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (pinInput.value.trim() === ADMIN_PIN) {
+                    pinInput.classList.remove('is-invalid');
+                    adminAuthModal.hide();
+                    
+                    const btnGate = document.getElementById('btnAdminGate');
+                    const actionsGroup = document.getElementById('desktopAdminActionsGroup');
+                    
+                    if (btnGate) btnGate.style.display = 'none';
+                    if (actionsGroup) actionsGroup.style.display = 'inline-flex';
+
+                    showToast("Painel administrativo liberado com sucesso!", "bg-success");
+                } else {
+                    pinInput.classList.add('is-invalid');
+                    pinInput.select();
+                }
+            });
+
+            const lockBtn = document.getElementById('btnAdminLockSession');
+            if (lockBtn) {
+                lockBtn.addEventListener('click', () => {
+                    const btnGate = document.getElementById('btnAdminGate');
+                    const actionsGroup = document.getElementById('desktopAdminActionsGroup');
+                    if (btnGate) btnGate.style.display = 'inline-block';
+                    if (actionsGroup) actionsGroup.style.display = 'none';
+                    showToast("Sessão administrativa bloqueada.", "bg-secondary");
+                });
+            }
+        }
+
+        const MODULE_LIST = [
+            "Todos",
+            "Panificação Clássica & Artesanal",
+            "Confeitaria & Sobremesas",
+            "Cozinha Internacional",
+            "Garde Manger & Entradas",
+            "Bases Culinárias & Molhos"
+        ];
+
+        function setupFilterBadges() {
+            const deskContainer = document.getElementById('desktopFilterContainer');
+            if (deskContainer) {
+                deskContainer.innerHTML = "";
+                MODULE_LIST.forEach(mod => {
+                    const btn = document.createElement('button');
+                    btn.type = "button";
+                    btn.className = `btn rounded-pill filter-chip py-1 px-3 ${selectedModule === mod ? 'active' : ''}`;
+                    btn.textContent = mod === "Panificação Clássica & Artesanal" ? "Panificação (Volúpia)" : mod;
+                    btn.addEventListener('click', () => {
+                        selectedModule = mod;
+                        setupFilterBadges();
+                        renderRecipeCards();
+                    });
+                    deskContainer.appendChild(btn);
+                });
+            }
+
+            const mobContainer = document.getElementById('mobileFilterContainer');
+            if (mobContainer) {
+                mobContainer.innerHTML = "";
+                MODULE_LIST.forEach(mod => {
+                    const btn = document.createElement('button');
+                    btn.type = "button";
+                    btn.className = `filter-chip-mobile ${selectedModule === mod ? 'active' : ''}`;
+                    btn.textContent = mod === "Panificação Clássica & Artesanal" ? "Panificação (Volúpia)" : mod;
+                    btn.addEventListener('click', () => {
+                        selectedModule = mod;
+                        setupFilterBadges();
+                        renderRecipeCards();
+                    });
+                    mobContainer.appendChild(btn);
+                });
+            }
+        }
+
+        function attachEventListeners() {
+            document.getElementById('desktopSearchInput').addEventListener('input', (e) => {
+                activeSearch = e.target.value.toLowerCase().trim();
+                renderRecipeCards();
+            });
+
+            const mobInput = document.getElementById('mobileSearchInput');
+            mobInput.addEventListener('input', (e) => {
+                activeSearch = e.target.value.toLowerCase().trim();
+                renderRecipeCards();
+            });
+
+            document.getElementById('mobBtnSearch').addEventListener('click', () => {
+                const searchBar = document.getElementById('mobileSearchBar');
+                searchBar.classList.toggle('d-none');
+                if (!searchBar.classList.contains('d-none')) {
+                    mobInput.focus();
+                }
+            });
+
+            document.getElementById('mobileCloseSearch').addEventListener('click', () => {
+                document.getElementById('mobileSearchBar').classList.add('d-none');
+                mobInput.value = "";
+                activeSearch = "";
+                renderRecipeCards();
+            });
+
+            // Proteção: Somente cadastrados podem criar receita
+            document.getElementById('btnOpenNewRecipe').addEventListener('click', () => {
+                requireRegisteredUser(() => openFormModal());
+            });
+            document.getElementById('mobFabNew').addEventListener('click', () => {
+                requireRegisteredUser(() => openFormModal());
+            });
+            document.getElementById('mobNavAdd').addEventListener('click', () => {
+                requireRegisteredUser(() => openFormModal());
+            });
+
+            document.getElementById('btnAddIngredientRow').addEventListener('click', () => addIngredientField());
+            document.getElementById('btnSaveRecipe').addEventListener('click', handleSaveRecipe);
+
+            // Proteção: Somente cadastrados confirmam exclusão
+            document.getElementById('btnConfirmDelete').addEventListener('click', () => {
+                requireRegisteredUser(() => {
+                    if (pendingDeleteId) {
+                        currentRecipes = currentRecipes.filter(r => r.id !== pendingDeleteId);
+                        saveToLocalStorage();
+                        renderRecipeCards();
+                        deleteModal.hide();
+                        showToast("Ficha técnica excluída.", "bg-dark");
+                        pendingDeleteId = null;
+                    }
+                });
+            });
+
+            document.getElementById('btnExportJSON').addEventListener('click', exportDatabase);
+            document.getElementById('mobActionExport').addEventListener('click', () => {
+                settingsOffcanvas.hide();
+                exportDatabase();
+            });
+
+            const btnImport = document.getElementById('btnImportJSONTrigger');
+            if (btnImport) {
+                btnImport.addEventListener('click', () => {
+                    document.getElementById('fileImportJSON').click();
+                });
+            }
+
+            const handleImport = (fileInput) => {
+                const file = fileInput.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    try {
+                        const parsed = JSON.parse(event.target.result);
+                        if (Array.isArray(parsed)) {
+                            currentRecipes = parsed;
+                            saveToLocalStorage();
+                            renderRecipeCards();
+                            showToast("Backup importado com êxito!", "bg-success");
+                        } else {
+                            showToast("Formato de arquivo inválido.", "bg-danger");
+                        }
+                    } catch (err) {
+                        showToast("Erro ao processar arquivo JSON.", "bg-danger");
+                    }
+                };
+                reader.readAsText(file);
+                fileInput.value = "";
+            };
+
+            document.getElementById('fileImportJSON').addEventListener('change', function () {handleImport(this);});
+            document.getElementById('mobFileImport').addEventListener('change', function () {
+                settingsOffcanvas.hide();
+                handleImport(this);
+            });
+
+            const confirmReset = () => {
+                if (window.confirm("Deseja restaurar as fichas originais da parceria IGA & Volúpia? Dados não salvos serão substituídos.")) {
+                    currentRecipes = JSON.parse(JSON.stringify(DEFAULT_RECIPES_DATABASE));
+                    saveToLocalStorage();
+                    setupFilterBadges();
+                    renderRecipeCards();
+                    showToast("Fichas didáticas restauradas!", "bg-success");
+                }
+            };
+            document.getElementById('btnResetDefault').addEventListener('click', confirmReset);
+            document.getElementById('mobActionReset').addEventListener('click', () => {
+                settingsOffcanvas.hide();
+                confirmReset();
+            });
+
+            document.getElementById('mobNavHome').addEventListener('click', () => {
+                setActiveMobNav('mobNavHome');
+                selectedModule = "Todos";
+                activeSearch = "";
+                setupFilterBadges();
+                renderRecipeCards();
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            });
+
+            document.getElementById('mobNavSearch').addEventListener('click', () => {
+                setActiveMobNav('mobNavSearch');
+                document.getElementById('mobileSearchBar').classList.remove('d-none');
+                mobInput.focus();
+            });
+
+            document.getElementById('mobNavCategories').addEventListener('click', () => {
+                setActiveMobNav('mobNavCategories');
+                document.getElementById('mobileFilterContainer').scrollIntoView({behavior: 'smooth', block: 'center'});
+            });
+
+            document.getElementById('mobNavSettings').addEventListener('click', () => {
+                settingsOffcanvas.show();
+            });
+            document.getElementById('mobBtnMenu').addEventListener('click', () => {
+                settingsOffcanvas.show();
+            });
+
+            document.getElementById('btnResetSearchFilters').addEventListener('click', () => {
+                selectedModule = "Todos";
+                activeSearch = "";
+                document.getElementById('desktopSearchInput').value = "";
+                document.getElementById('mobileSearchInput').value = "";
+                setupFilterBadges();
+                renderRecipeCards();
+            });
+        }
+
+        function setActiveMobNav(activeId) {
+            document.querySelectorAll('.mobile-nav-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.id === activeId);
+            });
+        }
+
+        function renderRecipeCards() {
+            const container = document.getElementById('recipesGridContainer');
+            const emptyState = document.getElementById('recipesEmptyState');
+            updateCounters();
+
+            const filtered = currentRecipes.filter(r => {
+                const matchMod = (selectedModule === "Todos" || r.module === selectedModule);
+                const matchTxt = !activeSearch ||
+                    r.name.toLowerCase().includes(activeSearch) ||
+                    r.module.toLowerCase().includes(activeSearch) ||
+                    r.category.toLowerCase().includes(activeSearch) ||
+                    (r.classAdjustments && r.classAdjustments.toLowerCase().includes(activeSearch)) ||
+                    r.ingredients.some(ing => ing.item.toLowerCase().includes(activeSearch));
+
+                return matchMod && matchTxt;
+            });
+
+            container.innerHTML = "";
+
+            if (filtered.length === 0) {
+                emptyState.classList.remove('d-none');
+                return;
+            }
+
+            emptyState.classList.add('d-none');
+
+            filtered.forEach(recipe => {
+                const col = document.createElement('div');
+                col.className = "col-12 col-md-6 col-lg-4";
+
+                const fallback = "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80";
+                const displayPhoto = recipe.image && recipe.image.trim() !== "" ? recipe.image : fallback;
+                const hasAdjustments = Boolean(recipe.classAdjustments && recipe.classAdjustments.trim() !== "");
+
+                col.innerHTML = `
+                    <div class="card recipe-card h-100 shadow-sm d-flex flex-column">
+                        <div class="card-img-wrap">
+                            <img src="${displayPhoto}" alt="${escapeHTML(recipe.name)}" onerror="this.src='${fallback}'" loading="lazy">
+                            <span class="position-absolute top-0 start-0 m-3 badge bg-dark bg-opacity-75 backdrop-blur rounded-pill fw-semibold text-white px-3 py-1" style="font-size: 0.72rem;">
+                                ${escapeHTML(recipe.category)}
+                            </span>
+                            ${hasAdjustments ? `
+                                <span class="position-absolute bottom-0 start-0 m-2 badge bg-warning text-dark rounded-pill fw-bold" style="font-size: 0.68rem;">
+                                    <i class="bi bi-pencil-fill me-1"></i> Com Ajuste de Bancada
+                                </span>
+                            ` : ''}
+                        </div>
+                        <div class="card-body p-3 p-xl-4 d-flex flex-column flex-grow-1">
+                            <div class="mb-2">
+                                <span class="badge badge-iga-primary rounded-pill px-2 py-1 small fw-semibold">
+                                    <i class="bi bi-mortarboard-fill me-1"></i> ${escapeHTML(recipe.module)}
+                                </span>
+                            </div>
+
+                            <h5 class="card-title fw-bold text-dark mb-2" style="font-size: 1.05rem; line-height: 1.35;">
+                                ${escapeHTML(recipe.name)}
+                            </h5>
+
+                            <div class="d-flex gap-2 flex-wrap mb-3 text-muted small">
+                                <span><i class="bi bi-clock me-1 text-primary"></i>${escapeHTML(recipe.prepTime)}</span>
+                                <span>•</span>
+                                <span><i class="bi bi-pie-chart me-1 text-success"></i>${escapeHTML(recipe.yield)}</span>
+                            </div>
+
+                            ${hasAdjustments ? `
+                                <div class="bench-adjustment-box mb-3 p-2 small">
+                                    <strong class="d-block text-dark" style="font-size: 0.72rem;">
+                                        <i class="bi bi-info-circle-fill text-warning me-1"></i> Último Ajuste de Aula:
+                                    </strong>
+                                    <span class="text-truncate d-block text-secondary" style="font-size: 0.75rem;">
+                                        ${escapeHTML(recipe.classAdjustments)}
+                                    </span>
+                                </div>
+                            ` : ''}
+
+                            <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center">
+                                <button class="btn btn-outline-dark btn-sm rounded-pill px-3 py-1 fw-semibold" onclick="viewRecipeDetails('${recipe.id}')">
+                                    <i class="bi bi-file-earmark-ruled me-1"></i> Ficha & Ajustes
+                                </button>
+                                <div class="d-flex gap-1">
+                                    <button class="btn btn-light btn-sm rounded-circle text-primary p-2" title="Editar Ficha" onclick="handleEditTrigger('${recipe.id}')">
+                                        <i class="bi bi-pencil fs-6"></i>
+                                    </button>
+                                    <button class="btn btn-light btn-sm rounded-circle text-danger p-2" title="Excluir" onclick="handleDeleteTrigger('${recipe.id}')">
+                                        <i class="bi bi-trash fs-6"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(col);
+            });
+        }
+
+        // Gatilhos com checagem de cadastro
+        function handleEditTrigger(recipeId) {
+            requireRegisteredUser(() => openFormModal(recipeId));
+        }
+
+        function handleDeleteTrigger(recipeId) {
+            requireRegisteredUser(() => promptDelete(recipeId));
+        }
+
+        // Formatação de Visualização e Impressão
+        function viewRecipeDetails(recipeId, scale = 1) {
+            const recipe = currentRecipes.find(r => r.id === recipeId);
+            if (!recipe) return;
+
+            viewingRecipe = recipe;
+            activeScaleMultiplier = scale;
+
+            const content = document.getElementById('viewRecipeContent');
+            const fallback = "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80";
+            const displayPhoto = recipe.image && recipe.image.trim() !== "" ? recipe.image : fallback;
+
+            const scaledIngredients = recipe.ingredients.map(ing => {
+                const numericAmount = parseFloat(ing.amount.replace(',', '.'));
+                let scaledAmountStr = ing.amount;
+                if (!isNaN(numericAmount)) {
+                    const scaledVal = (numericAmount * activeScaleMultiplier);
+                    scaledAmountStr = Number(scaledVal.toFixed(2)).toString();
+                }
+                return {
+                    ...ing,
+                    displayAmount: scaledAmountStr
+                };
+            });
+
+            const stepLines = recipe.instructions.split('\n').filter(line => line.trim() !== "");
+            let stepsHtml = "";
+            stepLines.forEach((st, idx) => {
+                const clean = st.replace(/^\d+[\.\-\)]\s*/, '');
+                stepsHtml += `
+                    <li class="print-step-item d-flex align-items-start gap-1 mb-2">
+                        <strong class="text-danger small">${idx + 1}.</strong>
+                        <span class="text-dark small lh-sm">${escapeHTML(clean)}</span>
+                    </li>
+                `;
+            });
+
+            let nutriRowHtml = "";
+            if (recipe.nutrition && (recipe.nutrition.calories || recipe.nutrition.protein || recipe.nutrition.carbs)) {
+                nutriRowHtml = `
+                    <div class="print-nutri-bar d-flex justify-content-around text-center py-2 bg-light rounded-3 border mt-3">
+                        <span><strong>Calorias:</strong> ${recipe.nutrition.calories || 0} kcal</span>
+                        <span><strong>Proteínas:</strong> ${recipe.nutrition.protein || 0}g</span>
+                        <span><strong>Carboidratos:</strong> ${recipe.nutrition.carbs || 0}g</span>
+                        <span><strong>Gorduras:</strong> ${recipe.nutrition.fats || 0}g</span>
+                    </div>
+                `;
+            }
+
+            content.innerHTML = `
+                <div class="print-page-wrapper">
+                    
+                    <!-- Cabeçalho de Impressão -->
+                    <div class="print-header d-flex justify-content-between align-items-center mb-2">
+                        <div class="d-flex align-items-center gap-2">
+                            <img src="iga_2.jpg" onerror="this.src='iga.jpg'" alt="IGA" style="height: 36px; object-fit: contain;">
+                            <div>
+                                <strong class="d-block text-primary fs-6 lh-1">IGA • INSTITUTO GASTRONÔMICO</strong>
+                                <small class="text-muted" style="font-size: 9px;">Ficha Técnica Operacional e Didática de Bancada</small>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center gap-2 text-end">
+                            <div>
+                                <strong class="d-block text-danger fs-6 lh-1">VOLÚPIA</strong>
+                                <small class="text-muted" style="font-size: 9px;">Panificação & Confeitaria Artesanal</small>
+                            </div>
+                            <img src="logoTipo.jpg" onerror="this.src='LOGOFUNDOAMARELO2_85X85.jpg'" alt="Volúpia" style="height: 36px; object-fit: contain;">
+                        </div>
+                    </div>
+
+                    <!-- Cartão Hero com Dados Técnicos e Foto em Proporção Controlada -->
+                    <div class="print-hero-card p-3 rounded-4 bg-light border d-flex justify-content-between align-items-center gap-3 mb-3">
+                        <div class="flex-grow-1">
+                            <span class="badge bg-danger-subtle text-danger rounded-pill px-3 py-1 fw-bold mb-1" style="font-size: 0.75rem;">${escapeHTML(recipe.module)}</span>
+                            <h4 class="fw-bold text-dark font-serif mb-2 fs-5 fs-md-4">${escapeHTML(recipe.name)}</h4>
+                            <div class="d-flex flex-wrap gap-2 gap-md-3 text-muted small" style="font-size: 0.8rem;">
+                                <span><i class="bi bi-clock me-1 text-primary"></i> <strong>Tempo:</strong> ${escapeHTML(recipe.prepTime)}</span>
+                                <span>•</span>
+                                <span><i class="bi bi-pie-chart me-1 text-success"></i> <strong>Rendimento:</strong> ${escapeHTML(recipe.yield)}</span>
+                                <span>•</span>
+                                <span><i class="bi bi-tag me-1"></i> ${escapeHTML(recipe.category)}</span>
+                            </div>
+                        </div>
+                        <div class="flex-shrink-0">
+                            <img src="${displayPhoto}" alt="${escapeHTML(recipe.name)}" onerror="this.src='${fallback}'" class="modal-recipe-thumb">
+                        </div>
+                    </div>
+
+                    <!-- Botões de Escala (Ocultos na Impressão) -->
+                    <div class="bg-light p-2 rounded-pill d-flex align-items-center justify-content-center gap-2 mb-3 no-print">
+                        <span class="small fw-semibold text-muted ms-2"><i class="bi bi-calculator me-1"></i> Escalar Bancada:</span>
+                        <button class="btn btn-sm rounded-pill px-3 py-1 ${activeScaleMultiplier === 0.5 ? 'btn-danger' : 'btn-white bg-white border'}" onclick="viewRecipeDetails('${recipe.id}', 0.5)">0.5x</button>
+                        <button class="btn btn-sm rounded-pill px-3 py-1 ${activeScaleMultiplier === 1 ? 'btn-danger' : 'btn-white bg-white border'}" onclick="viewRecipeDetails('${recipe.id}', 1)">1x (Padrão)</button>
+                        <button class="btn btn-sm rounded-pill px-3 py-1 ${activeScaleMultiplier === 2 ? 'btn-danger' : 'btn-white bg-white border'}" onclick="viewRecipeDetails('${recipe.id}', 2)">2x</button>
+                        <button class="btn btn-sm rounded-pill px-3 py-1 ${activeScaleMultiplier === 5 ? 'btn-danger' : 'btn-white bg-white border'}" onclick="viewRecipeDetails('${recipe.id}', 5)">5x</button>
+                    </div>
+
+                    <!-- Conteúdo Principal: Insumos à esquerda e Modo de Preparo à direita -->
+                    <div class="row g-3">
+                        <div class="col-md-5">
+                            <div class="print-col-box p-3 bg-white rounded-4 border h-100">
+                                <h6 class="fw-bold text-dark mb-2 d-flex align-items-center justify-content-between" style="font-size: 0.9rem;">
+                                    <span><i class="bi bi-basket text-danger me-1"></i> Insumos ${activeScaleMultiplier !== 1 ? `(${activeScaleMultiplier}x)` : ''}</span>
+                                    <small class="text-muted fw-normal" style="font-size: 0.72rem;">Checklist</small>
+                                </h6>
+                                <div class="d-flex flex-column gap-1">
+                                    ${scaledIngredients.map(ing => `
+                                        <div class="print-check-item d-flex align-items-center gap-2 py-1 border-bottom border-light">
+                                            <input class="form-check-input mt-0" type="checkbox" style="width: 14px; height: 14px;">
+                                            <span class="small">
+                                                <strong>${escapeHTML(ing.displayAmount)}${escapeHTML(ing.unit)}</strong> ${escapeHTML(ing.item)}${ing.notes ? `<span class="text-muted" style="font-size: 0.75rem;">(${escapeHTML(ing.notes)})</span>` : ''}
+                                            </span>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-7">
+                            <div class="print-col-box p-3 bg-white rounded-4 border h-100">
+                                <h6 class="fw-bold text-dark mb-2" style="font-size: 0.9rem;">
+                                    <i class="bi bi-journal-text text-primary me-1"></i> Passo a Passo Padronizado
+                                </h6>
+                                <ol class="list-unstyled mb-0">
+                                    ${stepsHtml}
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ajustes de Bancada e Notas Didáticas -->
+                    <div class="print-adjustments-box p-3 rounded-3 mt-3" style="background-color: #fff9e6; border: 1px dashed #d97706;">
+                        <strong class="text-dark d-block mb-1" style="font-size: 0.85rem;">
+                            <i class="bi bi-lightbulb-fill text-warning me-1"></i> Ajustes Feitos em Aula & Notas do Instrutor:
+                        </strong>
+                        <div class="text-secondary small" style="line-height: 1.4;">
+                            ${recipe.classAdjustments && recipe.classAdjustments.trim() !== "" ? escapeHTML(recipe.classAdjustments) : '<em class="text-muted">Nenhum ajuste específico registrado para esta turma até ao momento.</em>'}
+                        </div>
+                    </div>
+
+                    <!-- Tabela Nutricional Estimada -->
+                    ${nutriRowHtml}
+
+                </div>
+            `;
+
+            document.getElementById('btnEditCurrent').onclick = () => {
+                requireRegisteredUser(() => {
+                    viewModal.hide();
+                    openFormModal(recipe.id);
+                });
+            };
+
+            viewModal.show();
+        }
+
+        function addIngredientField(item = "", amount = "", unit = "", notes = "") {
+            const container = document.getElementById('ingredientsContainer');
+            const rowId = "ing-row-" + Date.now() + "-" + Math.random().toString(36).substring(2, 5);
+
+            const div = document.createElement('div');
+            div.className = "row g-2 align-items-center mb-2 ingredient-entry-row";
+            div.id = rowId;
+
+            div.innerHTML = `
+                <div class="col-5 col-md-5">
+                    <input type="text" class="form-control form-control-sm ing-item" placeholder="Insumo (ex: Farinha 00)" value="${escapeHTML(item)}" required>
+                </div>
+                <div class="col-3 col-md-2">
+                    <input type="text" class="form-control form-control-sm ing-amount" placeholder="Qtd (500)" value="${escapeHTML(amount)}" required>
+                </div>
+                <div class="col-3 col-md-2">
+                    <input type="text" class="form-control form-control-sm ing-unit" placeholder="Unid (g, ml)" value="${escapeHTML(unit)}">
+                </div>
+                <div class="col-10 col-md-2">
+                    <input type="text" class="form-control form-control-sm ing-notes" placeholder="% padeiro / nota" value="${escapeHTML(notes)}">
+                </div>
+                <div class="col-2 col-md-1 text-end">
+                    <button type="button" class="btn btn-outline-danger btn-sm border-0 p-1" onclick="document.getElementById('${rowId}').remove()" title="Remover">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+            `;
+            container.appendChild(div);
+        }
+
+        function openFormModal(recipeId = null) {
+            const form = document.getElementById('recipeForm');
+            form.classList.remove('was-validated');
+            form.reset();
+
+            const container = document.getElementById('ingredientsContainer');
+            container.innerHTML = "";
+
+            if (recipeId) {
+                const recipe = currentRecipes.find(r => r.id === recipeId);
+                if (!recipe) return;
+
+                document.getElementById('formModalTitle').textContent = "Editar Ficha de Aula";
+                document.getElementById('recipeId').value = recipe.id;
+                document.getElementById('recipeName').value = recipe.name;
+                document.getElementById('recipeModule').value = recipe.module;
+                document.getElementById('recipeCategory').value = recipe.category;
+                document.getElementById('recipeTime').value = recipe.prepTime;
+                document.getElementById('recipeYield').value = recipe.yield;
+                document.getElementById('recipeImage').value = recipe.image || "";
+                document.getElementById('recipeInstructions').value = recipe.instructions;
+                document.getElementById('recipeClassAdjustments').value = recipe.classAdjustments || "";
+
+                if (recipe.nutrition) {
+                    document.getElementById('nutriCalories').value = recipe.nutrition.calories || "";
+                    document.getElementById('nutriProtein').value = recipe.nutrition.protein || "";
+                    document.getElementById('nutriCarbs').value = recipe.nutrition.carbs || "";
+                    document.getElementById('nutriFats').value = recipe.nutrition.fats || "";
+                }
+
+                if (recipe.ingredients && recipe.ingredients.length > 0) {
+                    recipe.ingredients.forEach(i => addIngredientField(i.item, i.amount, i.unit, i.notes || ""));
+                } else {
+                    addIngredientField();
+                }
+            } else {
+                document.getElementById('formModalTitle').textContent = "Cadastrar Ficha de Aula";
+                document.getElementById('recipeId').value = "";
+                addIngredientField();
+                addIngredientField();
+                addIngredientField();
+            }
+
+            formModal.show();
+        }
+
+        function handleSaveRecipe() {
+            const form = document.getElementById('recipeForm');
+
+            const rows = document.querySelectorAll('.ingredient-entry-row');
+            const ingredients = [];
+            rows.forEach(r => {
+                const item = r.querySelector('.ing-item').value.trim();
+                const amount = r.querySelector('.ing-amount').value.trim();
+                const unit = r.querySelector('.ing-unit').value.trim();
+                const notes = r.querySelector('.ing-notes').value.trim();
+                if (item && amount) {
+                    ingredients.push({item, amount, unit, notes});
+                }
+            });
+
+            if (!form.checkValidity() || ingredients.length === 0) {
+                form.classList.add('was-validated');
+                if (ingredients.length === 0) {
+                    showToast("Insira ao menos um ingrediente com quantidade.", "bg-danger");
+                }
+                return;
+            }
+
+            const idField = document.getElementById('recipeId').value;
+            const isEditing = Boolean(idField);
+
+            const record = {
+                id: isEditing ? idField : "iga-rec-" + Date.now(),
+                name: document.getElementById('recipeName').value.trim(),
+                module: document.getElementById('recipeModule').value,
+                category: document.getElementById('recipeCategory').value,
+                prepTime: document.getElementById('recipeTime').value.trim(),
+                yield: document.getElementById('recipeYield').value.trim(),
+                image: document.getElementById('recipeImage').value.trim(),
+                ingredients: ingredients,
+                instructions: document.getElementById('recipeInstructions').value.trim(),
+                classAdjustments: document.getElementById('recipeClassAdjustments').value.trim(),
+                nutrition: {
+                    calories: parseFloat(document.getElementById('nutriCalories').value) || 0,
+                    protein: parseFloat(document.getElementById('nutriProtein').value) || 0,
+                    carbs: parseFloat(document.getElementById('nutriCarbs').value) || 0,
+                    fats: parseFloat(document.getElementById('nutriFats').value) || 0
+                }
+            };
+
+            if (isEditing) {
+                const idx = currentRecipes.findIndex(r => r.id === idField);
+                if (idx !== -1) {
+                    currentRecipes[idx] = record;
+                    showToast("Ficha de aula atualizada com sucesso!", "bg-success");
+                }
+            } else {
+                currentRecipes.unshift(record);
+                showToast("Ficha cadastrada na bancada!", "bg-success");
+            }
+
+            saveToLocalStorage();
+            formModal.hide();
+            renderRecipeCards();
+        }
+
+        function promptDelete(id) {
+            const target = currentRecipes.find(r => r.id === id);
+            if (!target) return;
+
+            pendingDeleteId = id;
+            document.getElementById('deleteModalRecipeName').textContent = `Deseja realmente excluir "${target.name}"?`;
+            deleteModal.show();
+        }
+
+        function exportDatabase() {
+            const jsonStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(currentRecipes, null, 2));
+            const anchor = document.createElement('a');
+            anchor.setAttribute("href", jsonStr);
+            anchor.setAttribute("download", `igaClass_fichas_ajustes_${new Date().toISOString().slice(0, 10)}.json`);
+            document.body.appendChild(anchor);
+            anchor.click();
+            anchor.remove();
+            showToast("Backup baixado com sucesso!", "bg-info");
+        }
+
+        function escapeHTML(val) {
+            if (!val) return "";
+            return String(val)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+
+</html>
