@@ -39,19 +39,14 @@
             --text-primary: #1e293b;
             --text-muted: #64748b;
             --accent-border: #e2e8f0;
-            --mobile-nav-height: 60px;
-            --mobile-header-height: 56px;
+            --mobile-nav-height: 64px;
+            --mobile-header-height: 60px;
             --safe-bottom: env(safe-area-inset-bottom, 0px);
         }
 
         * {
             -webkit-tap-highlight-color: transparent;
             box-sizing: border-box;
-        }
-
-        html, body {
-            overflow-x: hidden;
-            width: 100%;
         }
 
         body {
@@ -101,28 +96,32 @@
             border: 1px solid rgba(11, 59, 126, 0.2);
         }
 
+        .badge-aula-adjustment {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
+
         /* Logos da Navbar */
         .brand-logo-desktop {
-            height: 42px;
+            height: 48px;
             width: auto;
-            max-width: 100px;
             object-fit: contain;
             display: block;
         }
 
         .brand-logo-mobile {
-            height: 30px;
+            height: 34px;
             width: auto;
-            max-width: 70px;
             object-fit: contain;
             display: block;
         }
 
-        /* Controle da Imagem no Modal */
+        /* Controle da Imagem da Ficha no Modal (Tela) */
         .modal-recipe-thumb {
-            width: 110px;
-            height: 90px;
-            min-width: 110px;
+            width: 120px;
+            height: 95px;
+            min-width: 120px;
             object-fit: cover;
             border-radius: 8px;
             border: 1px solid #e2e8f0;
@@ -217,7 +216,7 @@
             body {
                 background-color: #f5f7fa;
                 padding-top: var(--mobile-header-height);
-                padding-bottom: calc(var(--mobile-nav-height) + var(--safe-bottom) + 20px);
+                padding-bottom: calc(var(--mobile-nav-height) + var(--safe-bottom) + 24px);
             }
 
             .mobile-top-bar {
@@ -230,18 +229,18 @@
                 backdrop-filter: blur(12px);
                 -webkit-backdrop-filter: blur(12px);
                 border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-                z-index: 1030;
+                z-index: 1040;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                padding: 0 12px;
+                padding: 0 14px;
             }
 
             .category-scroll-mobile {
                 display: flex;
                 gap: 8px;
                 overflow-x: auto;
-                padding: 4px 12px 10px 12px;
+                padding: 6px 12px 10px 12px;
                 -webkit-overflow-scrolling: touch;
                 scrollbar-width: none;
             }
@@ -292,19 +291,19 @@
 
             .fab-new-recipe {
                 position: fixed;
-                bottom: calc(var(--mobile-nav-height) + var(--safe-bottom) + 14px);
-                right: 16px;
-                width: 52px;
-                height: 52px;
+                bottom: calc(var(--mobile-nav-height) + var(--safe-bottom) + 16px);
+                right: 18px;
+                width: 58px;
+                height: 58px;
                 border-radius: 50%;
                 background: linear-gradient(135deg, var(--iga-red), #ba1422);
                 color: white;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                box-shadow: 0 6px 20px rgba(217, 26, 42, 0.4);
-                z-index: 1025;
-                font-size: 22px;
+                box-shadow: 0 8px 22px rgba(217, 26, 42, 0.45);
+                z-index: 1030;
+                font-size: 26px;
                 border: none;
                 transition: transform 0.2s;
             }
@@ -325,7 +324,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: space-around;
-                z-index: 1030;
+                z-index: 1045;
                 box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.03);
             }
 
@@ -346,12 +345,16 @@
             }
 
             .mobile-nav-btn i {
-                font-size: 1.25rem;
+                font-size: 1.3rem;
                 margin-bottom: 2px;
             }
 
             .mobile-nav-btn.active {
                 color: var(--iga-red);
+            }
+
+            .modal.fade .modal-dialog {
+                transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
             }
 
             .modal-sheet-mobile .modal-dialog {
@@ -362,7 +365,6 @@
                 left: 0;
                 right: 0;
                 transform: translateY(100%);
-                transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
             }
 
             .modal-sheet-mobile.show .modal-dialog {
@@ -372,8 +374,8 @@
             .modal-sheet-mobile .modal-content {
                 border-radius: 1.5rem 1.5rem 0 0 !important;
                 border: none;
-                max-height: 90vh;
-                height: auto;
+                max-height: 92vh;
+                height: 92vh;
                 display: flex;
                 flex-direction: column;
             }
@@ -386,10 +388,13 @@
                 margin: 10px auto 4px auto;
             }
 
-            .modal-recipe-thumb {
-                width: 80px;
-                height: 75px;
-                min-width: 80px;
+            .mobile-form-footer {
+                position: sticky;
+                bottom: 0;
+                background: #ffffff;
+                padding: 12px 16px;
+                border-top: 1px solid #f1f5f9;
+                z-index: 10;
             }
         }
 
@@ -400,7 +405,9 @@
             padding: 0.85rem 1.1rem;
         }
 
-        /* Impressão Técnica em 1 Página A4 */
+        /* ----------------------------------------------------
+           AJUSTES DE IMPRESSÃO: TOPO ABSOLUTO E 1 PÁGINA A4
+        ----------------------------------------------------- */
         @page {
             size: A4 portrait;
             margin: 0mm 8mm;
@@ -410,7 +417,7 @@
             html, body {
                 height: 100% !important;
                 background: #ffffff !important;
-                font-size: 10px !important;
+                font-size: 10.5px !important;
                 color: #000000 !important;
                 margin: 0 !important;
                 padding: 0 !important;
@@ -500,9 +507,52 @@
             }
 
             .modal-recipe-thumb {
-                width: 90px !important;
-                height: 65px !important;
-                min-width: 90px !important;
+                width: 95px !important;
+                height: 70px !important;
+                min-width: 95px !important;
+                object-fit: cover !important;
+                border-radius: 6px !important;
+                border: 1px solid #cbd5e1 !important;
+            }
+
+            .print-col-box {
+                border: 1px solid #e2e8f0 !important;
+                border-radius: 6px !important;
+                padding: 6px 8px !important;
+                background: #ffffff !important;
+                min-height: 100% !important;
+            }
+
+            .print-check-item {
+                border-bottom: 1px dashed #e2e8f0 !important;
+                padding: 2px 0 !important;
+                font-size: 10px !important;
+                line-height: 1.2 !important;
+            }
+
+            .print-step-item {
+                margin-bottom: 3px !important;
+                font-size: 10px !important;
+                line-height: 1.25 !important;
+            }
+
+            .print-adjustments-box {
+                background: #fffbeb !important;
+                border: 1px solid #f59e0b !important;
+                border-radius: 6px !important;
+                padding: 5px 8px !important;
+                margin-top: 6px !important;
+                font-size: 9.5px !important;
+                line-height: 1.25 !important;
+            }
+
+            .print-nutri-bar {
+                border: 1px solid #cbd5e1 !important;
+                border-radius: 4px !important;
+                padding: 3px 6px !important;
+                margin-top: 6px !important;
+                font-size: 9px !important;
+                background: #f8fafc !important;
             }
         }
     </style>
@@ -510,34 +560,36 @@
 
 <body>
 
-    <!-- NAVBAR DESKTOP (Responsiva e sem estourar linhas) -->
+    <!-- NAVBAR DESKTOP -->
     <nav class="navbar navbar-expand-lg desktop-navbar sticky-top py-2 desktop-only">
-        <div class="container d-flex flex-wrap align-items-center justify-content-between gap-2">
+        <div class="container d-flex align-items-center justify-content-between">
             <!-- Logos Co-branding IGA x Volúpia -->
-            <div class="d-flex align-items-center gap-2">
+            <div class="d-flex align-items-center gap-3">
                 <div class="d-flex align-items-center" title="Instituto Gastronômico das Américas">
                     <img src="iga_2.jpg" onerror="this.src='iga.jpg'" alt="IGA" class="brand-logo-desktop">
                 </div>
 
-                <div class="vr my-1 text-secondary opacity-50" style="height: 32px;"></div>
+                <div class="vr my-1 text-secondary opacity-50" style="height: 38px;"></div>
 
                 <div class="d-flex align-items-center" title="Volúpia Forno & Panificação Artesanal">
                     <img src="logoTipo.jpg" onerror="this.src='LOGOFUNDOAMARELO2_85X85.jpg'" alt="Volúpia" class="brand-logo-desktop">
                 </div>
 
-                <div class="ms-1">
+                <div>
                     <div class="d-flex align-items-center gap-2">
-                        <span class="fs-5 fw-bold text-dark lh-1" style="letter-spacing: -0.5px;">iga<span class="text-danger">Class</span></span>
-                        <span class="badge rounded-pill bg-danger-subtle text-danger fw-semibold px-2 py-0" style="font-size: 0.65rem;">PARCERIA</span>
+                        <span class="fs-5 fw-bold text-dark lh-1" style="letter-spacing: -0.5px;">iga<span
+                                class="text-danger">Class</span></span>
+                        <span class="badge rounded-pill bg-danger-subtle text-danger fw-semibold px-2 py-0"
+                            style="font-size: 0.65rem;">PARCERIA DIDÁTICA</span>
                     </div>
-                    <small class="text-muted d-none d-lg-block pt-1" style="font-size: 0.72rem; font-weight: 500;">
-                        Fichas Didáticas • IGA & Volúpia Padaria
+                    <small class="text-muted d-block pt-1" style="font-size: 0.72rem; font-weight: 500;">
+                        Livro de Receitas | Correções em Aula • IGA & Volúpia Padaria
                     </small>
                 </div>
             </div>
 
-            <!-- Ações Desktop -->
-            <div class="d-flex flex-wrap align-items-center gap-2 ms-auto">
+            <!-- Ações Desktop: Usuário Atual, Administração e Nova Receita -->
+            <div class="d-flex align-items-center gap-2">
                 <!-- Indicador de Usuário Conectado -->
                 <div id="desktopUserBadge" class="d-none align-items-center gap-2 bg-light px-3 py-1 rounded-pill border">
                     <i class="bi bi-person-circle text-primary"></i>
@@ -547,44 +599,47 @@
                     </button>
                 </div>
 
-                <!-- Botão de Identificação -->
+                <!-- Botão para Identificar/Cadastrar (quando não conectado) -->
                 <button type="button" class="btn btn-outline-primary btn-sm rounded-pill px-3" id="btnOpenUserAuth">
-                    <i class="bi bi-person-plus me-1"></i> <span class="d-none d-xl-inline">Identificar-se</span>
+                    <i class="bi bi-person-plus me-1"></i> Identificar-se
                 </button>
 
-                <!-- Botão Painel Administrativo -->
                 <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill px-3" id="btnAdminGate"
                     data-bs-toggle="modal" data-bs-target="#adminAuthModal" title="Painel Administrativo">
-                    <i class="bi bi-lock-fill text-warning me-1"></i> Admin
+                    <i class="bi bi-lock-fill text-warning me-1"></i> Administração
                 </button>
 
-                <!-- Grupo de Administração Liberado -->
-                <div id="desktopAdminActionsGroup" style="display: none;" class="align-items-center gap-1">
-                    <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill px-2" id="btnExportJSON" title="Exportar Backup">
-                        <i class="bi bi-download"></i> <span class="d-none d-xl-inline">Exportar</span>
+                <!-- Grupo de botões exibido após PIN -->
+                <div id="desktopAdminActionsGroup" style="display: none;" class="align-items-center gap-2">
+                    <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill px-3" id="btnExportJSON"
+                        title="Exportar backup completo">
+                        <i class="bi bi-download me-1"></i> Exportar
                     </button>
                     
-                    <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill px-2" id="btnImportJSONTrigger" title="Importar Backup">
-                        <i class="bi bi-upload"></i> <span class="d-none d-xl-inline">Importar</span>
+                    <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill px-3" id="btnImportJSONTrigger"
+                        title="Importar arquivo JSON">
+                        <i class="bi bi-upload me-1"></i> Importar
                     </button>
                     <input type="file" id="fileImportJSON" accept=".json" class="d-none">
 
-                    <button type="button" class="btn btn-outline-info btn-sm rounded-pill px-2" id="btnViewRegisteredUsers" title="Pessoas Cadastradas">
-                        <i class="bi bi-people-fill"></i>
+                    <button type="button" class="btn btn-outline-info btn-sm rounded-pill px-3" id="btnViewRegisteredUsers"
+                        title="Ver Pessoas Cadastradas">
+                        <i class="bi bi-people-fill me-1"></i> Pessoas
                     </button>
 
-                    <button type="button" class="btn btn-outline-danger btn-sm rounded-pill px-2" id="btnResetDefault" title="Restaurar Banco">
-                        <i class="bi bi-arrow-counterclockwise"></i>
+                    <button type="button" class="btn btn-outline-danger btn-sm rounded-pill px-3" id="btnResetDefault"
+                        title="Restaurar banco pedagógico">
+                        <i class="bi bi-arrow-counterclockwise me-1"></i> Restaurar
                     </button>
 
-                    <button type="button" class="btn btn-outline-dark btn-sm rounded-circle p-1 px-2" id="btnAdminLockSession" title="Bloquear Admin">
+                    <button type="button" class="btn btn-outline-dark btn-sm rounded-circle p-1 px-2" id="btnAdminLockSession"
+                        title="Bloquear Administração">
                         <i class="bi bi-x-lg"></i>
                     </button>
                 </div>
 
-                <!-- Botão Nova Receita -->
-                <button class="btn btn-iga btn-sm rounded-pill px-3 shadow-sm" id="btnOpenNewRecipe">
-                    <i class="bi bi-plus-circle-fill me-1"></i> Nova Receita
+                <button class="btn btn-iga btn-sm rounded-pill px-3 ms-2 shadow-sm" id="btnOpenNewRecipe">
+                    <i class="bi bi-plus-circle-fill me-1"></i> Nova Receita de Aula
                 </button>
             </div>
         </div>
@@ -595,16 +650,16 @@
         <div class="d-flex align-items-center gap-2">
             <div class="d-flex align-items-center gap-1">
                 <img src="iga_2.jpg" onerror="this.src='iga.jpg'" alt="IGA" class="brand-logo-mobile">
-                <div class="vr text-secondary opacity-50" style="height: 18px;"></div>
+                <div class="vr text-secondary opacity-50" style="height: 22px;"></div>
                 <img src="logoTipo.jpg" onerror="this.src='LOGOFUNDOAMARELO2_85X85.jpg'" alt="Volúpia" class="brand-logo-mobile">
             </div>
             <div>
                 <span class="fw-bold text-dark fs-6 d-block lh-1">iga<span class="text-danger">Class</span></span>
-                <span class="text-muted" style="font-size: 0.65rem;">Bancada • IGA × Volúpia</span>
+                <span class="text-muted" style="font-size: 0.65rem;">Ajustes em Aula • IGA × Volúpia</span>
             </div>
         </div>
         <div class="d-flex align-items-center gap-1">
-            <button class="btn btn-light rounded-circle p-2 text-dark" id="mobBtnUser" aria-label="Identificar-se">
+            <button class="btn btn-light rounded-circle p-2 text-dark" id="mobBtnUser" aria-label="Identificar-se" title="Identificar">
                 <i class="bi bi-person fs-6"></i>
             </button>
             <button class="btn btn-light rounded-circle p-2 text-dark" id="mobBtnSearch" aria-label="Pesquisar">
@@ -617,7 +672,7 @@
     </header>
 
     <main class="container py-md-4 flex-grow-1 px-3 px-md-auto">
-        <!-- HERO BANNER DESKTOP -->
+        <!-- DESKTOP HERO BANNER -->
         <section class="hero-partnership p-4 p-md-5 mb-4 desktop-only">
             <div class="row align-items-center">
                 <div class="col-lg-8">
@@ -628,11 +683,13 @@
                     <h1 class="display-6 fw-bold mb-2 font-serif">Anotações e Fichas Técnicas de Aula</h1>
                     <p class="mb-0 text-white-50" style="max-width: 650px; font-size: 0.95rem; line-height: 1.5;">
                         Ambiente acadêmico para acompanhamento de fichas operacionais com histórico de correções de
-                        bancada, testes de hidratação e variações térmicas observadas em aula.
+                        bancada, testes de hidratação e variações térmicas observadas em aula pelos instrutores e
+                        alunos.
                     </p>
                 </div>
                 <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
-                    <div class="bg-white bg-opacity-10 backdrop-blur p-3 rounded-4 border border-white border-opacity-20 d-inline-block text-start w-100 w-md-auto">
+                    <div
+                        class="bg-white bg-opacity-10 backdrop-blur p-3 rounded-4 border border-white border-opacity-20 d-inline-block text-start w-100 w-md-auto">
                         <div class="d-flex align-items-center gap-3">
                             <div class="p-2 bg-white text-danger rounded-3">
                                 <i class="bi bi-journal-check fs-2"></i>
@@ -647,7 +704,7 @@
             </div>
         </section>
 
-        <!-- BUSCA E FILTROS DESKTOP -->
+        <!-- DESKTOP SEARCH AND MODULE FILTER -->
         <div class="card border-0 shadow-sm rounded-4 p-3 mb-4 desktop-only">
             <div class="row g-3 align-items-center">
                 <div class="col-md-5">
@@ -657,7 +714,7 @@
                         </span>
                         <input type="text" id="desktopSearchInput"
                             class="form-control border-start-0 rounded-end-pill py-2"
-                            placeholder="Buscar receita, insumo ou módulo...">
+                            placeholder="Buscar por receita, insumo ou módulo...">
                     </div>
                 </div>
                 <div class="col-md-7">
@@ -668,7 +725,7 @@
             </div>
         </div>
 
-        <!-- BARRA DE BUSCA MOBILE EXPANSÍVEL -->
+        <!-- MOBILE COLLAPSIBLE SEARCH BAR -->
         <div id="mobileSearchBar" class="mobile-only mb-3 d-none">
             <div class="input-group shadow-sm">
                 <span class="input-group-text bg-white border-0 ps-3 text-muted">
@@ -682,20 +739,21 @@
             </div>
         </div>
 
-        <!-- FILTRO DE CATEGORIAS MOBILE (Sem quebra nem estouro horizontal) -->
-        <div class="mobile-only mb-3">
-            <div class="category-scroll-mobile px-0" id="mobileFilterContainer">
+        <!-- MOBILE CATEGORY HORIZONTAL SCROLLER -->
+        <div class="mobile-only -mx-3 mb-3">
+            <div class="category-scroll-mobile" id="mobileFilterContainer">
             </div>
         </div>
 
-        <!-- HEADER MOBILE FEED -->
+        <!-- MOBILE FEED HEADER -->
         <div class="mobile-only d-flex justify-content-between align-items-center mb-3 px-1">
             <h6 class="fw-bold mb-0 text-dark" id="mobileFeedTitle">Fichas de Bancada</h6>
             <span class="badge bg-white text-muted border px-2 py-1 rounded-pill" id="mobileCounterBadge">0 receitas</span>
         </div>
 
-        <!-- GRID DE RECEITAS -->
-        <div class="row g-3 g-md-4" id="recipesGridContainer"></div>
+        <!-- RECIPES GRID -->
+        <div class="row g-3 g-md-4" id="recipesGridContainer">
+        </div>
 
         <!-- EMPTY STATE -->
         <div id="recipesEmptyState" class="text-center py-5 d-none">
@@ -709,11 +767,12 @@
     </main>
 
     <!-- Mobile FAB -->
-    <button class="fab-new-recipe mobile-only" id="mobFabNew" title="Nova Receita" aria-label="Nova Receita">
+    <button class="fab-new-recipe mobile-only" id="mobFabNew" title="Nova Receita de Aula"
+        aria-label="Nova Receita de Aula">
         <i class="bi bi-plus-lg"></i>
     </button>
 
-    <!-- Navegação Inferior Mobile -->
+    <!-- Mobile Bottom Navigation Bar -->
     <nav class="mobile-bottom-bar mobile-only">
         <button type="button" class="mobile-nav-btn active" id="mobNavHome">
             <i class="bi bi-journal-richtext"></i>
@@ -724,7 +783,7 @@
             <span>Buscar</span>
         </button>
         <button type="button" class="mobile-nav-btn" id="mobNavAdd">
-            <i class="bi bi-plus-circle-fill text-danger" style="font-size: 1.5rem; margin-top: -2px;"></i>
+            <i class="bi bi-plus-circle-fill text-danger" style="font-size: 1.6rem; margin-top: -3px;"></i>
             <span class="text-dark fw-bold">Novo</span>
         </button>
         <button type="button" class="mobile-nav-btn" id="mobNavCategories">
@@ -737,11 +796,10 @@
         </button>
     </nav>
 
-    <!-- MODAL DE IDENTIFICAÇÃO / CADASTRO -->
+    <!-- MODAL DE CADASTRO / LOGIN COM SOLICITAÇÃO DE SENHA -->
     <div class="modal fade" id="userAuthModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-4 border-0 shadow">
-                <div class="sheet-handle mobile-only"></div>
                 <div class="modal-header border-bottom px-4 py-3">
                     <div class="d-flex align-items-center gap-2">
                         <span class="p-2 bg-primary-subtle text-primary rounded-circle">
@@ -749,7 +807,7 @@
                         </span>
                         <div>
                             <h5 class="modal-title fw-bold fs-6 mb-0">Identificação de Bancada</h5>
-                            <small class="text-muted" style="font-size: 0.75rem;">Apenas membros cadastrados podem alterar fichas.</small>
+                            <small class="text-muted" style="font-size: 0.75rem;">Apenas pessoas cadastradas podem cadastrar, editar ou apagar fichas.</small>
                         </div>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
@@ -765,12 +823,13 @@
                     </ul>
 
                     <div class="tab-content" id="userAuthTabsContent">
+                        <!-- Aba Login: E-mail e Senha -->
                         <div class="tab-pane fade show active" id="panel-login" role="tabpanel">
                             <form id="formUserLogin">
                                 <div class="mb-2">
                                     <label class="form-label small fw-semibold">E-mail Cadastrado *</label>
                                     <input type="email" class="form-control rounded-3" id="loginEmail" required placeholder="seuemail@exemplo.com">
-                                    <div class="invalid-feedback small" id="loginEmailError">E-mail não localizado.</div>
+                                    <div class="invalid-feedback small" id="loginEmailError">E-mail não localizado. Por favor, cadastre-se.</div>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label small fw-semibold">Senha *</label>
@@ -783,6 +842,7 @@
                             </form>
                         </div>
 
+                        <!-- Aba Novo Cadastro: Nome, WhatsApp, E-mail e Senha -->
                         <div class="tab-pane fade" id="panel-register" role="tabpanel">
                             <form id="formUserRegister">
                                 <div class="mb-2">
@@ -812,17 +872,18 @@
         </div>
     </div>
 
-    <!-- MODAL DE LISTA DE PESSOAS CADASTRADAS -->
+    <!-- MODAL DE LISTA DE PESSOAS CADASTRADAS (ADMIN) -->
     <div class="modal fade" id="registeredUsersModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-4 border-0 shadow">
-                <div class="sheet-handle mobile-only"></div>
                 <div class="modal-header border-bottom px-4 py-3">
                     <h5 class="modal-title fw-bold fs-6"><i class="bi bi-people-fill text-primary me-2"></i>Pessoas Cadastradas</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                 </div>
-                <div class="modal-body p-0" style="max-height: 55vh; overflow-y: auto;">
-                    <ul class="list-group list-group-flush" id="usersListContainer"></ul>
+                <div class="modal-body p-0" style="max-height: 60vh; overflow-y: auto;">
+                    <ul class="list-group list-group-flush" id="usersListContainer">
+                        <!-- Renderizado via JS -->
+                    </ul>
                 </div>
                 <div class="modal-footer border-0 p-2 justify-content-end">
                     <button type="button" class="btn btn-secondary btn-sm rounded-pill px-3" data-bs-dismiss="modal">Fechar</button>
@@ -831,11 +892,10 @@
         </div>
     </div>
 
-    <!-- MODAL PIN ADMIN -->
+    <!-- MODAL DE VALIDAÇÃO DO PIN DE ADMINISTRAÇÃO -->
     <div class="modal fade" id="adminAuthModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered">
             <div class="modal-content rounded-4 border-0 shadow">
-                <div class="sheet-handle mobile-only"></div>
                 <div class="modal-header border-0 pb-0 justify-content-end">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                 </div>
@@ -844,7 +904,7 @@
                         <i class="bi bi-shield-lock-fill fs-2"></i>
                     </div>
                     <h5 class="fw-bold mb-1">Acesso Restrito</h5>
-                    <p class="text-muted small mb-3">Digite o PIN para liberar os controles avançados.</p>
+                    <p class="text-muted small mb-3">Digite o PIN para desbloquear os botões de administração.</p>
                     <form id="adminPinForm">
                         <div class="mb-3">
                             <input type="password" class="form-control text-center rounded-3" id="adminPinInput" 
@@ -859,33 +919,37 @@
     </div>
 
     <!-- MODAL DE VISUALIZAÇÃO E IMPRESSÃO -->
-    <div class="modal fade" id="viewRecipeModal" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="viewRecipeModal" tabindex="-1" aria-labelledby="viewTitle" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content rounded-4 border-0 shadow-lg">
                 <div class="sheet-handle mobile-only"></div>
                 <div class="modal-header border-0 pb-0 position-relative pt-3 px-4 no-print">
-                    <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal"
+                        aria-label="Fechar"></button>
                 </div>
 
-                <div class="modal-body pt-0 px-3 px-md-4" id="viewRecipeContent"></div>
+                <div class="modal-body pt-0 px-3 px-md-4" id="viewRecipeContent">
+                    <!-- Conteúdo dinâmico gerado via JS -->
+                </div>
 
-                <div class="modal-footer border-0 px-3 px-md-4 pb-3 bg-light rounded-bottom-4 no-print d-flex flex-wrap gap-2 justify-content-between">
-                    <button type="button" class="btn btn-outline-dark rounded-pill px-3 btn-sm flex-grow-1 flex-md-grow-0" onclick="window.print()">
-                        <i class="bi bi-printer me-1"></i> Imprimir (1 Pág)
+                <div class="modal-footer border-0 px-3 px-md-4 pb-3 bg-light rounded-bottom-4 no-print">
+                    <button type="button" class="btn btn-outline-dark rounded-pill px-3 px-md-4 btn-sm"
+                        onclick="window.print()">
+                        <i class="bi bi-printer me-1"></i> Imprimir Ficha de Bancada (1 Página)
                     </button>
-                    <div class="d-flex gap-2 flex-grow-1 flex-md-grow-0 justify-content-end">
-                        <button type="button" class="btn btn-outline-primary rounded-pill px-3 btn-sm" id="btnEditCurrent">
-                            <i class="bi bi-pencil me-1"></i> Editar
-                        </button>
-                        <button type="button" class="btn btn-secondary rounded-pill px-3 btn-sm" data-bs-dismiss="modal">Fechar</button>
-                    </div>
+                    <button type="button" class="btn btn-outline-primary rounded-pill px-3 px-md-4 btn-sm"
+                        id="btnEditCurrent">
+                        <i class="bi bi-pencil me-1"></i> Editar Ajustes
+                    </button>
+                    <button type="button" class="btn btn-secondary rounded-pill px-3 px-md-4 btn-sm"
+                        data-bs-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- MODAL DE FORMULÁRIO -->
-    <div class="modal fade" id="recipeFormModal" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="recipeFormModal" tabindex="-1" aria-labelledby="formTitle" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content rounded-4 border-0 shadow-lg">
                 <div class="sheet-handle mobile-only"></div>
@@ -895,8 +959,10 @@
                             <i class="bi bi-pencil-square fs-5"></i>
                         </span>
                         <div>
-                            <h5 class="modal-title fw-bold fs-6 fs-md-5 mb-0" id="formModalTitle">Cadastrar Ficha de Aula</h5>
-                            <small class="text-muted" style="font-size: 0.72rem;">igaClass • Padronização de Bancada</small>
+                            <h5 class="modal-title fw-bold fs-6 fs-md-5" id="formModalTitle">Cadastrar Ficha de Aula
+                            </h5>
+                            <small class="text-muted d-block" style="font-size: 0.72rem;">igaClass • Padronização e
+                                Ajustes de Bancada</small>
                         </div>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
@@ -906,29 +972,31 @@
                         <input type="hidden" id="recipeId">
 
                         <div class="row g-2 g-md-3 mb-3">
-                            <div class="col-12 col-md-7">
-                                <label class="form-label fw-semibold small mb-1">Nome da Receita *</label>
-                                <input type="text" class="form-control rounded-3" id="recipeName" required placeholder="Ex: Pão de Campanha com Levain">
+                            <div class="col-md-7">
+                                <label class="form-label fw-semibold small">Nome da Receita / Preparação *</label>
+                                <input type="text" class="form-control rounded-3" id="recipeName" required
+                                    placeholder="Ex: Pão de Campanha com Levain">
                                 <div class="invalid-feedback">Informe o nome da receita.</div>
                             </div>
-                            <div class="col-12 col-md-5">
-                                <label class="form-label fw-semibold small mb-1">Módulo de Aula *</label>
+                            <div class="col-md-5">
+                                <label class="form-label fw-semibold small">Disciplina / Módulo de Aula *</label>
                                 <select class="form-select rounded-3" id="recipeModule" required>
                                     <option value="" selected disabled>Selecione a disciplina...</option>
-                                    <option value="Panificação Clássica & Artesanal">Panificação Clássica & Artesanal (Volúpia)</option>
+                                    <option value="Panificação Clássica & Artesanal">Panificação Clássica & Artesanal
+                                        (Volúpia)</option>
                                     <option value="Confeitaria & Sobremesas">Confeitaria & Sobremesas</option>
                                     <option value="Cozinha Internacional">Cozinha Internacional</option>
                                     <option value="Garde Manger & Entradas">Garde Manger & Entradas</option>
                                     <option value="Bases Culinárias & Molhos">Bases Culinárias & Molhos</option>
                                     <option value="Bebidas & Coquetelaria">Bebidas & Coquetelaria</option>
                                 </select>
-                                <div class="invalid-feedback">Selecione o módulo.</div>
+                                <div class="invalid-feedback">Selecione o módulo correspondente.</div>
                             </div>
                         </div>
 
                         <div class="row g-2 g-md-3 mb-3">
                             <div class="col-6 col-md-3">
-                                <label class="form-label fw-semibold small mb-1">Categoria *</label>
+                                <label class="form-label fw-semibold small">Categoria *</label>
                                 <select class="form-select rounded-3" id="recipeCategory" required>
                                     <option value="Panificação">Panificação</option>
                                     <option value="Prato Principal">Prato Principal</option>
@@ -939,16 +1007,21 @@
                                 </select>
                             </div>
                             <div class="col-6 col-md-3">
-                                <label class="form-label fw-semibold small mb-1">Tempo *</label>
-                                <input type="text" class="form-control rounded-3" id="recipeTime" required placeholder="Ex: 2h 40min">
+                                <label class="form-label fw-semibold small">Tempo em Bancada *</label>
+                                <input type="text" class="form-control rounded-3" id="recipeTime" required
+                                    placeholder="Ex: 2h 40min">
+                                <div class="invalid-feedback">Informe o tempo.</div>
                             </div>
                             <div class="col-6 col-md-3">
-                                <label class="form-label fw-semibold small mb-1">Rendimento *</label>
-                                <input type="text" class="form-control rounded-3" id="recipeYield" required placeholder="Ex: 2 pães (600g)">
+                                <label class="form-label fw-semibold small">Rendimento Padrão *</label>
+                                <input type="text" class="form-control rounded-3" id="recipeYield" required
+                                    placeholder="Ex: 2 pães (600g)">
+                                <div class="invalid-feedback">Informe o rendimento.</div>
                             </div>
                             <div class="col-6 col-md-3">
-                                <label class="form-label fw-semibold small mb-1">Foto URL</label>
-                                <input type="url" class="form-control rounded-3" id="recipeImage" placeholder="https://...">
+                                <label class="form-label fw-semibold small">Foto URL (Opcional)</label>
+                                <input type="url" class="form-control rounded-3" id="recipeImage"
+                                    placeholder="https://...">
                             </div>
                         </div>
 
@@ -956,24 +1029,29 @@
 
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <div>
-                                <h6 class="fw-bold mb-0 fs-6 text-dark"><i class="bi bi-basket me-1 text-danger"></i> Insumos & Proporções</h6>
-                                <small class="text-muted" style="font-size: 0.72rem;">Lista de ingredientes e referências percentuais.</small>
+                                <h6 class="fw-bold mb-0 fs-6 text-dark"><i class="bi bi-basket me-1 text-danger"></i>
+                                    Insumos & Proporções</h6>
+                                <small class="text-muted" style="font-size: 0.72rem;">Adicione ingredientes com suas
+                                    medidas e referências.</small>
                             </div>
-                            <button type="button" class="btn btn-outline-primary btn-sm rounded-pill px-3" id="btnAddIngredientRow">
+                            <button type="button" class="btn btn-outline-primary btn-sm rounded-pill px-3"
+                                id="btnAddIngredientRow">
                                 <i class="bi bi-plus-lg me-1"></i> Insumo
                             </button>
                         </div>
 
-                        <!-- Insumos organizados sem quebra desajeitada -->
                         <div id="ingredientsContainer" class="mb-3"></div>
 
                         <hr class="my-3">
 
                         <div class="mb-3">
-                            <label class="form-label fw-semibold small mb-1">Modo de Preparo Padronizado *</label>
+                            <label class="form-label fw-semibold small">Modo de Preparo Padronizado *</label>
                             <textarea class="form-control rounded-3" id="recipeInstructions" rows="4" required
-                                placeholder="Descreva os passos didáticos de preparo..."></textarea>
+                                placeholder="Descreva os passos didáticos de preparo (autólise, sova, dobras, fermentação, cozimento)..."></textarea>
+                            <div class="invalid-feedback">Descreva o passo a passo.</div>
                         </div>
+
+                        <hr class="my-3">
 
                         <div class="p-3 rounded-3 mb-3" style="background-color: #fff9e6; border: 1px dashed #d97706;">
                             <div class="d-flex align-items-center gap-2 mb-1">
@@ -981,38 +1059,45 @@
                                 <h6 class="fw-bold mb-0 text-dark fs-6">Ajustes Feitos em Aula & Notas do Instrutor</h6>
                             </div>
                             <small class="text-muted d-block mb-2" style="font-size: 0.75rem;">
-                                Registre correções de bancada (hidratação, ponto de forno, variações climáticas).
+                                Registre correções de bancada (hidratação, ponto de forno, observações).
                             </small>
                             <textarea class="form-control rounded-3 border-warning" id="recipeClassAdjustments" rows="3"
-                                placeholder="Ex: A farinha exigiu 68% de hidratação (+25ml água gelada). Assou em 28 min a 210°C."></textarea>
+                                placeholder="Ex: Em aula no dia 14/09, a farinha exigiu 68% de hidratação (+25ml água gelada). Forno a 210°C assou em 28 minutos."></textarea>
                         </div>
 
                         <div class="row g-2 g-md-3">
                             <div class="col-12">
-                                <h6 class="fw-bold mb-1 fs-6 text-dark"><i class="bi bi-activity text-success me-1"></i> Estimativa Nutricional (por porção)</h6>
+                                <h6 class="fw-bold mb-1 fs-6 text-dark"><i class="bi bi-activity text-success me-1"></i>
+                                    Estimativa Nutricional (por porção)</h6>
                             </div>
                             <div class="col-3">
-                                <label class="form-label small text-muted mb-1">Kcal</label>
-                                <input type="number" class="form-control form-control-sm rounded-2" id="nutriCalories" placeholder="210">
+                                <label class="form-label small text-muted">Kcal</label>
+                                <input type="number" class="form-control form-control-sm rounded-2" id="nutriCalories"
+                                    placeholder="Ex: 210">
                             </div>
                             <div class="col-3">
-                                <label class="form-label small text-muted mb-1">Proteínas(g)</label>
-                                <input type="number" step="0.1" class="form-control form-control-sm rounded-2" id="nutriProtein" placeholder="8.5">
+                                <label class="form-label small text-muted">Proteínas (g)</label>
+                                <input type="number" step="0.1" class="form-control form-control-sm rounded-2"
+                                    id="nutriProtein" placeholder="Ex: 8.5">
                             </div>
                             <div class="col-3">
-                                <label class="form-label small text-muted mb-1">Carboidratos(g)</label>
-                                <input type="number" step="0.1" class="form-control form-control-sm rounded-2" id="nutriCarbs" placeholder="42">
+                                <label class="form-label small text-muted">Carboidratos (g)</label>
+                                <input type="number" step="0.1" class="form-control form-control-sm rounded-2"
+                                    id="nutriCarbs" placeholder="Ex: 42">
                             </div>
                             <div class="col-3">
-                                <label class="form-label small text-muted mb-1">Gorduras(g)</label>
-                                <input type="number" step="0.1" class="form-control form-control-sm rounded-2" id="nutriFats" placeholder="2.1">
+                                <label class="form-label small text-muted">Gorduras (g)</label>
+                                <input type="number" step="0.1" class="form-control form-control-sm rounded-2"
+                                    id="nutriFats" placeholder="Ex: 2.1">
                             </div>
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer border-top px-3 px-md-4 py-2 py-md-3 d-flex justify-content-end gap-2">
-                    <button type="button" class="btn btn-light rounded-pill px-3" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-iga rounded-pill px-4" id="btnSaveRecipe">
+                <div class="modal-footer border-top px-3 px-md-4 py-2 py-md-3 mobile-form-footer">
+                    <button type="button" class="btn btn-light rounded-pill px-3"
+                        data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-iga rounded-pill px-4 flex-grow-1 flex-md-grow-0"
+                        id="btnSaveRecipe">
                         <i class="bi bi-save2 me-1"></i> Gravar Ficha
                     </button>
                 </div>
@@ -1020,41 +1105,47 @@
         </div>
     </div>
 
-    <!-- MODAL DE CONFIRMAÇÃO DE EXCLUSÃO -->
+    <!-- MODAL DE EXCLUSÃO -->
     <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered">
             <div class="modal-content rounded-4 border-0 shadow">
-                <div class="sheet-handle mobile-only"></div>
                 <div class="modal-body text-center p-4">
                     <i class="bi bi-trash3-fill text-danger display-5 mb-3 d-block"></i>
                     <h5 class="fw-bold mb-1">Excluir Ficha?</h5>
-                    <p class="text-muted small mb-4" id="deleteModalRecipeName">Esta ação removerá a ficha técnica de forma irreversível.</p>
+                    <p class="text-muted small mb-4" id="deleteModalRecipeName">Esta ação removerá a ficha técnica
+                        permanentemente.</p>
                     <div class="d-flex justify-content-center gap-2">
-                        <button type="button" class="btn btn-light rounded-pill px-3 btn-sm" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-danger rounded-pill px-3 btn-sm" id="btnConfirmDelete">Confirmar</button>
+                        <button type="button" class="btn btn-light rounded-pill px-3 btn-sm"
+                            data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-danger rounded-pill px-3 btn-sm"
+                            id="btnConfirmDelete">Confirmar</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- OFFCANVAS CONFIGURAÇÕES MOBILE -->
-    <div class="offcanvas offcanvas-bottom rounded-top-4 border-0" tabindex="-1" id="mobileSettingsOffcanvas" style="max-height: 80vh;">
+    <!-- OFFCANVAS MOBILE -->
+    <div class="offcanvas offcanvas-bottom rounded-top-4 border-0" tabindex="-1" id="mobileSettingsOffcanvas"
+        aria-labelledby="settingsLabel" style="height: auto; max-height: 80vh;">
         <div class="sheet-handle"></div>
         <div class="offcanvas-header border-bottom py-2">
-            <h5 class="offcanvas-title fw-bold fs-6">igaClass • Painel de Ajustes</h5>
+            <h5 class="offcanvas-title fw-bold fs-6" id="settingsLabel">igaClass • Parceria IGA & Volúpia</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Fechar"></button>
         </div>
         <div class="offcanvas-body p-3">
             <div class="list-group list-group-flush rounded-3">
-                <button type="button" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3" id="mobActionExport">
+                <button type="button"
+                    class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3"
+                    id="mobActionExport">
                     <i class="bi bi-download text-primary fs-5"></i>
                     <div>
                         <div class="fw-semibold">Exportar Backup JSON</div>
-                        <small class="text-muted">Baixar arquivo com as receitas</small>
+                        <small class="text-muted">Download de todas as receitas e anotações</small>
                     </div>
                 </button>
-                <label class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 mb-0" style="cursor: pointer;">
+                <label class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 mb-0"
+                    style="cursor: pointer;">
                     <i class="bi bi-upload text-success fs-5"></i>
                     <div>
                         <div class="fw-semibold">Importar Backup JSON</div>
@@ -1062,23 +1153,27 @@
                     </div>
                     <input type="file" id="mobFileImport" accept=".json" class="d-none">
                 </label>
-                <button type="button" class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 text-danger" id="mobActionReset">
+                <button type="button"
+                    class="list-group-item list-group-item-action d-flex align-items-center gap-3 py-3 text-danger"
+                    id="mobActionReset">
                     <i class="bi bi-arrow-counterclockwise fs-5"></i>
                     <div>
-                        <div class="fw-semibold">Restaurar Padrões</div>
-                        <small class="text-muted">Recarregar os dados didáticos originais</small>
+                        <div class="fw-semibold">Restaurar Fichas Didáticas</div>
+                        <small class="text-muted">Recarregar os dados padronizados originais</small>
                     </div>
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- TOAST NOTIFICAÇÃO -->
-    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1090; margin-bottom: 64px;">
-        <div id="igaToast" class="toast align-items-center text-white bg-dark border-0 rounded-3 shadow" role="alert" aria-live="assertive" aria-atomic="true">
+    <!-- Toast Component -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1090; margin-bottom: 60px;">
+        <div id="igaToast" class="toast align-items-center text-white bg-dark border-0 rounded-3 shadow" role="alert"
+            aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
                 <div class="toast-body" id="toastMessage">Operação executada.</div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Fechar"></button>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
             </div>
         </div>
     </div>
@@ -1221,23 +1316,16 @@
 
         function handleResize() {
             const isMobile = window.innerWidth < 768;
-            const sheetModals = [
-                document.getElementById('viewRecipeModal'),
-                document.getElementById('recipeFormModal'),
-                document.getElementById('userAuthModal'),
-                document.getElementById('adminAuthModal'),
-                document.getElementById('registeredUsersModal'),
-                document.getElementById('deleteConfirmModal')
-            ];
+            const viewModalEl = document.getElementById('viewRecipeModal');
+            const formModalEl = document.getElementById('recipeFormModal');
 
-            sheetModals.forEach(modalEl => {
-                if (!modalEl) return;
-                if (isMobile) {
-                    modalEl.classList.add('modal-sheet-mobile');
-                } else {
-                    modalEl.classList.remove('modal-sheet-mobile');
-                }
-            });
+            if (isMobile) {
+                viewModalEl.classList.add('modal-sheet-mobile');
+                formModalEl.classList.add('modal-sheet-mobile');
+            } else {
+                viewModalEl.classList.remove('modal-sheet-mobile');
+                formModalEl.classList.remove('modal-sheet-mobile');
+            }
         }
 
         function loadStoredData() {
@@ -1265,12 +1353,14 @@
             }
         }
 
+        /* Gestão de Pessoas / Usuários Cadastrados com Senha */
         function loadUsersData() {
             try {
                 const storedUsers = localStorage.getItem(USERS_STORAGE_KEY);
                 if (storedUsers) {
                     registeredUsers = JSON.parse(storedUsers);
                 } else {
+                    // Usuário inicial didático com senha padrão
                     registeredUsers = [{
                         name: "Chef Instrutor",
                         whatsapp: "(21) 99999-8888",
@@ -1325,6 +1415,7 @@
         }
 
         function setupUserAuth() {
+            // Login com validação de E-mail e Senha
             document.getElementById('formUserLogin').addEventListener('submit', (e) => {
                 e.preventDefault();
                 const emailInput = document.getElementById('loginEmail');
@@ -1342,6 +1433,7 @@
                     return;
                 }
 
+                // Verifica se a senha confere
                 if (user.password && user.password !== passVal) {
                     passInput.classList.add('is-invalid');
                     passInput.focus();
@@ -1352,7 +1444,7 @@
                 sessionStorage.setItem(SESSION_USER_KEY, JSON.stringify(user));
                 userAuthModal.hide();
                 updateUserUI();
-                showToast(`Bem-vindo(a), ${user.name}!`, "bg-success");
+                showToast(`Bem-vindo(a), ${user.name}! Acesso liberado.`, "bg-success");
                 
                 emailInput.value = "";
                 passInput.value = "";
@@ -1364,6 +1456,7 @@
                 }
             });
 
+            // Novo Cadastro com Senha
             document.getElementById('formUserRegister').addEventListener('submit', (e) => {
                 e.preventDefault();
                 const name = document.getElementById('regName').value.trim();
@@ -1372,7 +1465,7 @@
                 const password = document.getElementById('regPassword').value.trim();
 
                 if (registeredUsers.some(u => u.email.toLowerCase() === email)) {
-                    showToast("Este e-mail já está cadastrado. Utilize o login.", "bg-warning");
+                    showToast("Este e-mail já está cadastrado. Utilize a aba 'Já sou Cadastrado'.", "bg-warning");
                     return;
                 }
 
@@ -1386,6 +1479,7 @@
                 userAuthModal.hide();
                 updateUserUI();
                 showToast("Cadastro realizado com sucesso!", "bg-success");
+
                 document.getElementById('formUserRegister').reset();
 
                 if (pendingActionCallback) {
@@ -1395,6 +1489,7 @@
                 }
             });
 
+            // Logout do Usuário
             document.getElementById('btnUserLogout').addEventListener('click', () => {
                 currentLoggedUser = null;
                 sessionStorage.removeItem(SESSION_USER_KEY);
@@ -1412,6 +1507,7 @@
                 userAuthModal.show();
             });
 
+            // Visualizar Pessoas no Painel de Admin
             document.getElementById('btnViewRegisteredUsers').addEventListener('click', () => {
                 const listEl = document.getElementById('usersListContainer');
                 listEl.innerHTML = "";
@@ -1473,7 +1569,7 @@
                     if (btnGate) btnGate.style.display = 'none';
                     if (actionsGroup) actionsGroup.style.display = 'inline-flex';
 
-                    showToast("Painel de administração desbloqueado!", "bg-success");
+                    showToast("Painel administrativo liberado com sucesso!", "bg-success");
                 } else {
                     pinInput.classList.add('is-invalid');
                     pinInput.select();
@@ -1564,6 +1660,7 @@
                 renderRecipeCards();
             });
 
+            // Proteção: Somente cadastrados podem criar receita
             document.getElementById('btnOpenNewRecipe').addEventListener('click', () => {
                 requireRegisteredUser(() => openFormModal());
             });
@@ -1577,6 +1674,7 @@
             document.getElementById('btnAddIngredientRow').addEventListener('click', () => addIngredientField());
             document.getElementById('btnSaveRecipe').addEventListener('click', handleSaveRecipe);
 
+            // Proteção: Somente cadastrados confirmam exclusão
             document.getElementById('btnConfirmDelete').addEventListener('click', () => {
                 requireRegisteredUser(() => {
                     if (pendingDeleteId) {
@@ -1626,7 +1724,7 @@
                 fileInput.value = "";
             };
 
-            document.getElementById('fileImportJSON').addEventListener('change', function () { handleImport(this); });
+            document.getElementById('fileImportJSON').addEventListener('change', function () {handleImport(this);});
             document.getElementById('mobFileImport').addEventListener('change', function () {
                 settingsOffcanvas.hide();
                 handleImport(this);
@@ -1785,6 +1883,7 @@
             });
         }
 
+        // Gatilhos com checagem de cadastro
         function handleEditTrigger(recipeId) {
             requireRegisteredUser(() => openFormModal(recipeId));
         }
@@ -1793,6 +1892,7 @@
             requireRegisteredUser(() => promptDelete(recipeId));
         }
 
+        // Formatação de Visualização e Impressão
         function viewRecipeDetails(recipeId, scale = 1) {
             const recipe = currentRecipes.find(r => r.id === recipeId);
             if (!recipe) return;
@@ -1833,64 +1933,65 @@
             if (recipe.nutrition && (recipe.nutrition.calories || recipe.nutrition.protein || recipe.nutrition.carbs)) {
                 nutriRowHtml = `
                     <div class="print-nutri-bar d-flex justify-content-around text-center py-2 bg-light rounded-3 border mt-3">
-                        <span><strong>Kcal:</strong> ${recipe.nutrition.calories || 0}</span>
-                        <span><strong>Prot:</strong> ${recipe.nutrition.protein || 0}g</span>
-                        <span><strong>Carb:</strong> ${recipe.nutrition.carbs || 0}g</span>
-                        <span><strong>Gord:</strong> ${recipe.nutrition.fats || 0}g</span>
+                        <span><strong>Calorias:</strong> ${recipe.nutrition.calories || 0} kcal</span>
+                        <span><strong>Proteínas:</strong> ${recipe.nutrition.protein || 0}g</span>
+                        <span><strong>Carboidratos:</strong> ${recipe.nutrition.carbs || 0}g</span>
+                        <span><strong>Gorduras:</strong> ${recipe.nutrition.fats || 0}g</span>
                     </div>
                 `;
             }
 
             content.innerHTML = `
                 <div class="print-page-wrapper">
-                    <!-- Cabeçalho Técnico -->
+                    
+                    <!-- Cabeçalho de Impressão -->
                     <div class="print-header d-flex justify-content-between align-items-center mb-2">
                         <div class="d-flex align-items-center gap-2">
-                            <img src="iga_2.jpg" onerror="this.src='iga.jpg'" alt="IGA" style="height: 32px; object-fit: contain;">
+                            <img src="iga_2.jpg" onerror="this.src='iga.jpg'" alt="IGA" style="height: 36px; object-fit: contain;">
                             <div>
                                 <strong class="d-block text-primary fs-6 lh-1">IGA • INSTITUTO GASTRONÔMICO</strong>
-                                <small class="text-muted" style="font-size: 9px;">Ficha Técnica Operacional e Didática</small>
+                                <small class="text-muted" style="font-size: 9px;">Ficha Técnica Operacional e Didática de Bancada</small>
                             </div>
                         </div>
                         <div class="d-flex align-items-center gap-2 text-end">
                             <div>
                                 <strong class="d-block text-danger fs-6 lh-1">VOLÚPIA</strong>
-                                <small class="text-muted" style="font-size: 9px;">Panificação & Forno Artesanal</small>
+                                <small class="text-muted" style="font-size: 9px;">Panificação & Confeitaria Artesanal</small>
                             </div>
-                            <img src="logoTipo.jpg" onerror="this.src='LOGOFUNDOAMARELO2_85X85.jpg'" alt="Volúpia" style="height: 32px; object-fit: contain;">
+                            <img src="logoTipo.jpg" onerror="this.src='LOGOFUNDOAMARELO2_85X85.jpg'" alt="Volúpia" style="height: 36px; object-fit: contain;">
                         </div>
                     </div>
 
-                    <!-- Cartão Hero com Ajuste Flexível -->
-                    <div class="print-hero-card p-3 rounded-4 bg-light border d-flex flex-wrap flex-sm-nowrap justify-content-between align-items-center gap-2 mb-3">
+                    <!-- Cartão Hero com Dados Técnicos e Foto em Proporção Controlada -->
+                    <div class="print-hero-card p-3 rounded-4 bg-light border d-flex justify-content-between align-items-center gap-3 mb-3">
                         <div class="flex-grow-1">
                             <span class="badge bg-danger-subtle text-danger rounded-pill px-3 py-1 fw-bold mb-1" style="font-size: 0.75rem;">${escapeHTML(recipe.module)}</span>
-                            <h4 class="fw-bold text-dark font-serif mb-2 fs-5">${escapeHTML(recipe.name)}</h4>
-                            <div class="d-flex flex-wrap gap-2 text-muted small" style="font-size: 0.78rem;">
-                                <span><i class="bi bi-clock me-1 text-primary"></i>${escapeHTML(recipe.prepTime)}</span>
+                            <h4 class="fw-bold text-dark font-serif mb-2 fs-5 fs-md-4">${escapeHTML(recipe.name)}</h4>
+                            <div class="d-flex flex-wrap gap-2 gap-md-3 text-muted small" style="font-size: 0.8rem;">
+                                <span><i class="bi bi-clock me-1 text-primary"></i> <strong>Tempo:</strong> ${escapeHTML(recipe.prepTime)}</span>
                                 <span>•</span>
-                                <span><i class="bi bi-pie-chart me-1 text-success"></i>${escapeHTML(recipe.yield)}</span>
+                                <span><i class="bi bi-pie-chart me-1 text-success"></i> <strong>Rendimento:</strong> ${escapeHTML(recipe.yield)}</span>
                                 <span>•</span>
-                                <span><i class="bi bi-tag me-1"></i>${escapeHTML(recipe.category)}</span>
+                                <span><i class="bi bi-tag me-1"></i> ${escapeHTML(recipe.category)}</span>
                             </div>
                         </div>
-                        <div class="flex-shrink-0 align-self-center">
+                        <div class="flex-shrink-0">
                             <img src="${displayPhoto}" alt="${escapeHTML(recipe.name)}" onerror="this.src='${fallback}'" class="modal-recipe-thumb">
                         </div>
                     </div>
 
-                    <!-- Botões de Escalonamento -->
+                    <!-- Botões de Escala (Ocultos na Impressão) -->
                     <div class="bg-light p-2 rounded-pill d-flex align-items-center justify-content-center gap-2 mb-3 no-print">
-                        <span class="small fw-semibold text-muted ms-2"><i class="bi bi-calculator me-1"></i> Escala:</span>
-                        <button class="btn btn-sm rounded-pill px-2 py-1 ${activeScaleMultiplier === 0.5 ? 'btn-danger' : 'btn-white bg-white border'}" onclick="viewRecipeDetails('${recipe.id}', 0.5)">0.5x</button>
-                        <button class="btn btn-sm rounded-pill px-2 py-1 ${activeScaleMultiplier === 1 ? 'btn-danger' : 'btn-white bg-white border'}" onclick="viewRecipeDetails('${recipe.id}', 1)">1x</button>
-                        <button class="btn btn-sm rounded-pill px-2 py-1 ${activeScaleMultiplier === 2 ? 'btn-danger' : 'btn-white bg-white border'}" onclick="viewRecipeDetails('${recipe.id}', 2)">2x</button>
-                        <button class="btn btn-sm rounded-pill px-2 py-1 ${activeScaleMultiplier === 5 ? 'btn-danger' : 'btn-white bg-white border'}" onclick="viewRecipeDetails('${recipe.id}', 5)">5x</button>
+                        <span class="small fw-semibold text-muted ms-2"><i class="bi bi-calculator me-1"></i> Escalar Bancada:</span>
+                        <button class="btn btn-sm rounded-pill px-3 py-1 ${activeScaleMultiplier === 0.5 ? 'btn-danger' : 'btn-white bg-white border'}" onclick="viewRecipeDetails('${recipe.id}', 0.5)">0.5x</button>
+                        <button class="btn btn-sm rounded-pill px-3 py-1 ${activeScaleMultiplier === 1 ? 'btn-danger' : 'btn-white bg-white border'}" onclick="viewRecipeDetails('${recipe.id}', 1)">1x (Padrão)</button>
+                        <button class="btn btn-sm rounded-pill px-3 py-1 ${activeScaleMultiplier === 2 ? 'btn-danger' : 'btn-white bg-white border'}" onclick="viewRecipeDetails('${recipe.id}', 2)">2x</button>
+                        <button class="btn btn-sm rounded-pill px-3 py-1 ${activeScaleMultiplier === 5 ? 'btn-danger' : 'btn-white bg-white border'}" onclick="viewRecipeDetails('${recipe.id}', 5)">5x</button>
                     </div>
 
-                    <!-- Colunas de Insumos e Preparo -->
+                    <!-- Conteúdo Principal: Insumos à esquerda e Modo de Preparo à direita -->
                     <div class="row g-3">
-                        <div class="col-12 col-md-5">
+                        <div class="col-md-5">
                             <div class="print-col-box p-3 bg-white rounded-4 border h-100">
                                 <h6 class="fw-bold text-dark mb-2 d-flex align-items-center justify-content-between" style="font-size: 0.9rem;">
                                     <span><i class="bi bi-basket text-danger me-1"></i> Insumos ${activeScaleMultiplier !== 1 ? `(${activeScaleMultiplier}x)` : ''}</span>
@@ -1901,7 +2002,7 @@
                                         <div class="print-check-item d-flex align-items-center gap-2 py-1 border-bottom border-light">
                                             <input class="form-check-input mt-0" type="checkbox" style="width: 14px; height: 14px;">
                                             <span class="small">
-                                                <strong>${escapeHTML(ing.displayAmount)}${escapeHTML(ing.unit)}</strong> ${escapeHTML(ing.item)}${ing.notes ? `<span class="text-muted" style="font-size: 0.75rem;"> (${escapeHTML(ing.notes)})</span>` : ''}
+                                                <strong>${escapeHTML(ing.displayAmount)}${escapeHTML(ing.unit)}</strong> ${escapeHTML(ing.item)}${ing.notes ? `<span class="text-muted" style="font-size: 0.75rem;">(${escapeHTML(ing.notes)})</span>` : ''}
                                             </span>
                                         </div>
                                     `).join('')}
@@ -1909,10 +2010,10 @@
                             </div>
                         </div>
 
-                        <div class="col-12 col-md-7">
+                        <div class="col-md-7">
                             <div class="print-col-box p-3 bg-white rounded-4 border h-100">
                                 <h6 class="fw-bold text-dark mb-2" style="font-size: 0.9rem;">
-                                    <i class="bi bi-journal-text text-primary me-1"></i> Passo a Passo
+                                    <i class="bi bi-journal-text text-primary me-1"></i> Passo a Passo Padronizado
                                 </h6>
                                 <ol class="list-unstyled mb-0">
                                     ${stepsHtml}
@@ -1921,17 +2022,19 @@
                         </div>
                     </div>
 
-                    <!-- Notas e Ajustes de Bancada -->
+                    <!-- Ajustes de Bancada e Notas Didáticas -->
                     <div class="print-adjustments-box p-3 rounded-3 mt-3" style="background-color: #fff9e6; border: 1px dashed #d97706;">
                         <strong class="text-dark d-block mb-1" style="font-size: 0.85rem;">
-                            <i class="bi bi-lightbulb-fill text-warning me-1"></i> Ajustes Feitos em Aula:
+                            <i class="bi bi-lightbulb-fill text-warning me-1"></i> Ajustes Feitos em Aula & Notas do Instrutor:
                         </strong>
                         <div class="text-secondary small" style="line-height: 1.4;">
-                            ${recipe.classAdjustments && recipe.classAdjustments.trim() !== "" ? escapeHTML(recipe.classAdjustments) : '<em class="text-muted">Nenhum ajuste específico registrado até ao momento.</em>'}
+                            ${recipe.classAdjustments && recipe.classAdjustments.trim() !== "" ? escapeHTML(recipe.classAdjustments) : '<em class="text-muted">Nenhum ajuste específico registrado para esta turma até ao momento.</em>'}
                         </div>
                     </div>
 
+                    <!-- Tabela Nutricional Estimada -->
                     ${nutriRowHtml}
+
                 </div>
             `;
 
@@ -1950,26 +2053,26 @@
             const rowId = "ing-row-" + Date.now() + "-" + Math.random().toString(36).substring(2, 5);
 
             const div = document.createElement('div');
-            div.className = "row g-2 align-items-center mb-2 ingredient-entry-row p-2 bg-light rounded-3";
+            div.className = "row g-2 align-items-center mb-2 ingredient-entry-row";
             div.id = rowId;
 
             div.innerHTML = `
-                <div class="col-10 col-md-5">
-                    <input type="text" class="form-control form-control-sm ing-item" placeholder="Insumo (ex: Farinha W300)" value="${escapeHTML(item)}" required>
+                <div class="col-5 col-md-5">
+                    <input type="text" class="form-control form-control-sm ing-item" placeholder="Insumo (ex: Farinha 00)" value="${escapeHTML(item)}" required>
                 </div>
-                <div class="col-2 col-md-1 order-md-last text-end">
-                    <button type="button" class="btn btn-outline-danger btn-sm border-0 p-1" onclick="document.getElementById('${rowId}').remove()" title="Remover">
-                        <i class="bi bi-trash"></i>
-                    </button>
-                </div>
-                <div class="col-4 col-md-2">
+                <div class="col-3 col-md-2">
                     <input type="text" class="form-control form-control-sm ing-amount" placeholder="Qtd (500)" value="${escapeHTML(amount)}" required>
                 </div>
                 <div class="col-3 col-md-2">
                     <input type="text" class="form-control form-control-sm ing-unit" placeholder="Unid (g, ml)" value="${escapeHTML(unit)}">
                 </div>
-                <div class="col-5 col-md-2">
-                    <input type="text" class="form-control form-control-sm ing-notes" placeholder="% / Notas" value="${escapeHTML(notes)}">
+                <div class="col-10 col-md-2">
+                    <input type="text" class="form-control form-control-sm ing-notes" placeholder="% padeiro / nota" value="${escapeHTML(notes)}">
+                </div>
+                <div class="col-2 col-md-1 text-end">
+                    <button type="button" class="btn btn-outline-danger btn-sm border-0 p-1" onclick="document.getElementById('${rowId}').remove()" title="Remover">
+                        <i class="bi bi-trash"></i>
+                    </button>
                 </div>
             `;
             container.appendChild(div);
@@ -2023,9 +2126,9 @@
 
         function handleSaveRecipe() {
             const form = document.getElementById('recipeForm');
+
             const rows = document.querySelectorAll('.ingredient-entry-row');
             const ingredients = [];
-
             rows.forEach(r => {
                 const item = r.querySelector('.ing-item').value.trim();
                 const amount = r.querySelector('.ing-amount').value.trim();
@@ -2070,11 +2173,11 @@
                 const idx = currentRecipes.findIndex(r => r.id === idField);
                 if (idx !== -1) {
                     currentRecipes[idx] = record;
-                    showToast("Ficha atualizada com sucesso!", "bg-success");
+                    showToast("Ficha de aula atualizada com sucesso!", "bg-success");
                 }
             } else {
                 currentRecipes.unshift(record);
-                showToast("Ficha cadastrada com sucesso!", "bg-success");
+                showToast("Ficha cadastrada na bancada!", "bg-success");
             }
 
             saveToLocalStorage();
